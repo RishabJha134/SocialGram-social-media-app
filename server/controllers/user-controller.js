@@ -221,6 +221,8 @@ const updateProfile = async (req, res) => {
         );
       }
 
+      // hum pehle check kar lenge ki agar pic pehle se hi exist karta hai toh hum use pehle cloudinary se remove karenge and then hum pic ko updat karenge by help of the public_id. aur if not exist then directly upload kardenge cloudinary par and cloudinary hume ke url generate karke dedega image ka:-
+
       // Handling profile picture update
       if (files.media) {
         // Remove existing image from Cloudinary if public_id exists
@@ -326,6 +328,3 @@ module.exports = {
   logout,
   myInfo,
 };
-
-
-
