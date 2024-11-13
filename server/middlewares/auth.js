@@ -13,9 +13,9 @@ const auth = async (req, res, next) => {
     }
     const user = await User.findById(decodedToken.token)
       .populate("followers")
-    //   .populate("threads")
-    //   .populate("replies")
-    //   .populate("reposts");
+      .populate("threads")
+      .populate("replies")
+      .populate("reposts");
 
     if (!user) {
       throw new Error("User not found!");

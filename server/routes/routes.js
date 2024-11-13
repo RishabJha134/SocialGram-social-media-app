@@ -18,6 +18,7 @@ const {
   repost,
   singlePost,
 } = require("../controllers/post-controller");
+const { addComment, deleteComment } = require("../controllers/comment-controller");
 const routes = express.Router();
 
 routes.post("/signin", signin);
@@ -34,5 +35,7 @@ routes.delete("/post/:id", auth, deletePost);
 routes.put("/post/like/:id", auth, likePost);
 routes.put("/repost/:id", auth, repost);
 routes.get("/post/:id", auth, singlePost);
+routes.post("/comment/:id", auth, addComment);
+routes.delete("/comment/:postId/:id", auth,deleteComment);
 
 module.exports = { routes };

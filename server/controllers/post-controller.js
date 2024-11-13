@@ -64,7 +64,7 @@ const allPost = async (req, res) => {
         populate: {
           // nested populate
           path: "admin",
-          model: "user",
+        //   model: "user",
         },
       });
     res.status(200).json({ msg: "Posts fetched successfully", posts });
@@ -241,3 +241,4 @@ const singlePost = async (req, res) => {
 };
 
 module.exports = { addPost, allPost, deletePost, likePost, repost, singlePost };
+
