@@ -26,7 +26,7 @@ const auth = async (req, res, next) => {
     // console.log(user);
     next();
   } catch (err) {
-    res.status(400).json({ msg: "Error in followUser !", err: err.message });
+    res.status(400).json({ msg: "Error !", err: err.message });
   }
 };
 

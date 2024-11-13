@@ -291,6 +291,31 @@ const searchUser = async (req, res) => {
   }
 };
 
+// logout user:-
+const logout = async (req, res) => {
+  // console.log(req.cookie("token"))
+  try {
+    res.cookie("token", "", {
+      maxAge: Date.now(),
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
+    res.status(201).json({ msg: "Logged out successfully!" });
+  } catch (err) {
+    res.status(400).json({ msg: "Error in logout!", err: err.message });
+  }
+};
+
+// my info:-
+const myInfo = async (req, res) => {
+  try {
+    res.status(200).json({ me: req.user });
+  } catch (err) {
+    res.status(400).json({ msg: "Error in myInfo!", err: err.message });
+  }
+};
+
 module.exports = {
   signin,
   login,
@@ -298,4 +323,9 @@ module.exports = {
   followUser,
   updateProfile,
   searchUser,
+  logout,
+  myInfo,
 };
+
+
+
