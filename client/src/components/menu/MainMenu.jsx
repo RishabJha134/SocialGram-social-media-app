@@ -1,10 +1,20 @@
 import React from "react";
 import { Menu, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMainMenu, toggleThemeMode } from "../../redux/slice";
 
 const MainMenu = () => {
-  const handleClose = () => {};
-  const handleToggleTheme = () => {};
+  const { anchorE1 } = useSelector((state) => state.service);
+  console.log(anchorE1);
+  const dispatch = useDispatch();
+  const handleClose = () => {
+    dispatch(toggleMainMenu(null));
+  };
+  const handleToggleTheme = () => {
+    handleClose();
+    dispatch(toggleThemeMode());
+  };
   const handleLogout = () => {
     // Implement logout logic here
     console.log("Logged out");
@@ -12,8 +22,8 @@ const MainMenu = () => {
   return (
     <>
       <Menu
-        anchorEl={""}
-        open={true}
+        anchorEl={anchorE1} // ye element kis position par open hona chahiye kis element ke pass open hona chahiye.
+        open={anchorE1 ? true : false}
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
