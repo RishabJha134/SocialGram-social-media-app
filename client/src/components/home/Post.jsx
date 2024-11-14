@@ -3,10 +3,11 @@ import React from "react";
 import { IoIosMore } from "react-icons/io";
 import PostOne from "./PostOne";
 import PostTwo from "./PostTwo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMyMenu } from "../../redux/slice";
 
 const Post = () => {
+  const { darkMode } = useSelector((state) => state.service);
   const _300 = useMediaQuery("(min-width:300px)");
   const _400 = useMediaQuery("(min-width:400px)");
   const _700 = useMediaQuery("(min-width:700px)");
@@ -52,7 +53,7 @@ const Post = () => {
         >
           <Typography
             variant="caption"
-            color={"GrayText"}
+            color={darkMode ? "white" : "GrayText"}
             fontSize={"1rem"}
             position={"relative"}
             // alignItems={"center"}

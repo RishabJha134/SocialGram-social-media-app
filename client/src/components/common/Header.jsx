@@ -45,7 +45,7 @@ const Header = () => {
           <Stack
             justifyContent={"center"}
             width={"550px"}
-            bgcolor={"aliceblue"}
+            bgcolor={darkMode?"":"aliceblue"}
             zIndex={2}
             height={96}
           >
@@ -68,7 +68,7 @@ const Header = () => {
             width={"100%"}
             height={52}
             p={1}
-            bgcolor={"aliceblue"}
+            bgcolor={darkMode?"":"aliceblue"}
             zIndex={2}
           >
             <Navbar></Navbar>
