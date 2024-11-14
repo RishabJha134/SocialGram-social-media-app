@@ -11,18 +11,27 @@ import { Box, Stack } from "@mui/system";
 import { useRef, useState } from "react";
 import { FaImages } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
+import { useDispatch, useSelector } from "react-redux";
+import { addPostModel } from "../../redux/slice";
 
 const AddPost = () => {
   const _700 = useMediaQuery("(min-width:700px)");
   const _300 = useMediaQuery("(min-width:300px)");
   const _500 = useMediaQuery("(min-width:500px)");
 
+  const { openAddPostModel } = useSelector((state) => state.service); // service slice ka state(data) select karke use kar rahe hai.
+  // console.log(store);
+  console.log(openAddPostModel);
+  const dispatch = useDispatch();
+
   const [text, setText] = useState();
   const [media, setMedia] = useState();
   const mediaRef = useRef();
-  function handleClose() {}
+  function handleClose() {
+    console.log("handleClose");
+    dispatch(addPostModel(false));
+  }
   function handleMediaRef() {
-    console.log("hello world!");
     console.log(mediaRef.current);
     mediaRef.current.click();
   }
@@ -30,13 +39,17 @@ const AddPost = () => {
   return (
     <>
       <Dialog
-        open={true}
+        open={openAddPostModel}
         onClose={handleClose}
         fullWidth
         fullScreen={_700 ? false : true}
       >
-        <Box position={"absolute"} top={20} right={20} onclick={handleClose}>
-          <RxCross2 size={28} className="image-icon"></RxCross2>
+        <Box position={"absolute"} top={20} right={20}>
+          <RxCross2
+            size={28}
+            className="image-icon"
+            onClick={handleClose}
+          ></RxCross2>
         </Box>
 
         <DialogTitle textAlign={"center"} mb={5}>
