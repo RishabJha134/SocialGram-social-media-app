@@ -32,7 +32,7 @@ routes.get("/me", auth, myInfo);
 routes.post("/post", auth, addPost);
 routes.get("/post", auth, allPost);
 routes.delete("/post/:id", auth, deletePost);
-routes.put("/post/like/:id", auth, likePost);
+routes.put("/post/like/:id",auth, likePost);
 routes.put("/repost/:id", auth, repost);
 routes.get("/post/:id", auth, singlePost);
 routes.post("/comment/:id", auth, addComment);

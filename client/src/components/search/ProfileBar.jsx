@@ -1,8 +1,15 @@
-import { Avatar, Button, Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const ProfileBar = () => {
+const ProfileBar = (data) => {
   const { darkMode } = useSelector((state) => state.service);
   const _700 = useMediaQuery("(min-width:700px)");
   return (
@@ -24,29 +31,47 @@ const ProfileBar = () => {
         }}
       >
         <Stack flexDirection={"row"} gap={2}>
-          <Avatar src="" alt="" />
+          <Avatar
+            src={data.e ? data.e.profilePic : ""}
+            alt={data.e ? data.e.userName : ""}
+          />
           <Stack flexDirection={"column"}>
-            <Typography variant="h6" fontWeight={"bold"} fontSize={_700?"1rem":"0.9rem"}>
-              Hello World
+            <Link to={`/profile/threads/${data.e._id}`} className="link">
+              <Typography
+                variant="h6"
+                fontWeight={"bold"}
+                fontSize={_700 ? "1rem" : "0.9rem"}
+              >
+                {data.e ? data.e.userName : ""}
+              </Typography>
+            </Link>
+
+            <Typography
+              variant="caption"
+              fontSize={_700 ? "1.1rem" : "0.75rem"}
+              color={"gray"}
+            >
+              {data.e ? data.e.bio : ""}
             </Typography>
-            <Typography variant="caption" fontSize={_700?"1.1rem":"0.75rem"} color={"gray"}>
-              This is Bio
-            </Typography>
-            <Typography variant="caption" fontSize={_700?"1rem":"0.9rem"}>
-              3 followers
+            <Typography variant="caption" fontSize={_700 ? "1rem" : "0.9rem"}>
+              {data.e ? data.e.followers.length : 0} followers
             </Typography>
           </Stack>
         </Stack>
-        <Button
-          size="medium"
-          sx={{
-            border: "1px solid gray",
-            color: darkMode ? "whitesmoke" : "black",
-            borderRadius: "10px",
-            p: 2,
-            height: 40,
-          }}
-        >Follow</Button>
+        <Link to={`/profile/threads/${data.e._id}`} className="link">
+          <Button
+            size="medium"
+            sx={{
+              border: "1px solid gray",
+              color: darkMode ? "whitesmoke" : "black",
+              borderRadius: "10px",
+              p: 2,
+              height: 40,
+            }}
+          >
+            Follow
+          </Button>
+        </Link>
       </Stack>
     </>
   );

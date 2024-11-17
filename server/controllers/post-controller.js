@@ -144,9 +144,12 @@ const deletePost = async (req, res) => {
 };
 
 const likePost = async (req, res) => {
+  // req.user._id = 6734c2ce2514ca8e2268a2b3
+  console.log("like post wala api hai yeh")
   try {
     // ye id us post ki hai jis post ko hume like ya dislike karna hai:-
     const { id } = req.params;
+    console.log(id);
     if (!id) {
       return res.status(400).json({ msg: "Please provide post id" });
     }

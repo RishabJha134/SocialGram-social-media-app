@@ -8,9 +8,11 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addPostModel } from "../../redux/slice";
+import { useMyInfoQuery } from "../../redux/service";
 
 const Input = () => {
   const _700 = useMediaQuery("(min-width:700px)");
+  const { myInfo } = useMyInfoQuery();
   // const { openAddPostModel } = useSelector((state) => state.service);
   const dispatch = useDispatch();
   function handleAddPost() {
@@ -34,7 +36,10 @@ const Input = () => {
           onClick={handleAddPost}
         >
           <Stack flexDirection={"row"} alignItems={"center"} gap={2}>
-            <Avatar src="" alt="AJ"></Avatar>
+            <Avatar
+              src={myInfo ? myInfo.profilePic : ""}
+              alt={myInfo ? myInfo.userName : ""}
+            ></Avatar>
             <Typography color={"GrayText"}>Start a Thread...</Typography>
           </Stack>
           <Button

@@ -1,24 +1,42 @@
 import { Stack, Typography, useMediaQuery } from "@mui/material";
-import React from "react";
 import { IoIosMore } from "react-icons/io";
 import PostOne from "./PostOne";
 import PostTwo from "./PostTwo";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMyMenu } from "../../redux/slice";
+import { addPostId, toggleMyMenu } from "../../redux/slice";
+import { useEffect, useState } from "react";
 
-const Post = () => {
-  const { darkMode } = useSelector((state) => state.service);
+const Post = (data) => {
+  // console.log(data);
+  // console.log(JSON.stringify(data.post.admin._id));
+  const { darkMode, myInfo } = useSelector((state) => state.service);
+
+  const [isAdmin, setIsAdmin] = useState();
+
   const _300 = useMediaQuery("(min-width:300px)");
   const _400 = useMediaQuery("(min-width:400px)");
   const _700 = useMediaQuery("(min-width:700px)");
 
   const dispatch = useDispatch();
 
-  function handleMyMenu(e) {
-    // Add your custom code here to handle the menu click event
-    console.log("My Menu clicked");
-    dispatch(toggleMyMenu(e.currentTarget));
-  }
+  const handleOpenMenu = (event) => {
+    dispatch(addPostId(data.post._id));
+    dispatch(toggleMyMenu(event.currentTarget));
+  };
+
+  const checkIsAdmin = () => {
+    if (data.post?.admin._id === myInfo._id) {
+      setIsAdmin(true);
+      return;
+    }
+    setIsAdmin(false);
+  };
+
+  useEffect(() => {
+    if (data.post && myInfo) {
+      checkIsAdmin();
+    }
+  }, [data.post, myInfo]);
 
   return (
     <>
@@ -26,7 +44,6 @@ const Post = () => {
         flexDirection={"row"}
         justifyContent={"space-between"}
         borderBottom={"3px solid gray"}
-        // alignItems={"center"}
         p={_700 ? 2 : _400 ? 1 : "5px"}
         mx={"auto"}
         width={_700 ? "70%" : _300 ? "90%" : "100%"}
@@ -39,30 +56,29 @@ const Post = () => {
         }}
       >
         <Stack flexDirection={"row"} gap={_700 ? 2 : 1}>
-          <PostOne></PostOne>
-          <PostTwo></PostTwo>
+          <PostOne e={data.post} />
+          <PostTwo e={data.post} />
         </Stack>
         <Stack
           flexDirection={"row"}
-          gap={1}
           justifyContent={"center"}
-          // backgroundColor={"red"}
+          gap={1}
           fontSize={"1rem"}
-          // alignItems={"center"}
-          // alignSelf={"center"}
         >
           <Typography
             variant="caption"
             color={darkMode ? "white" : "GrayText"}
             fontSize={"1rem"}
             position={"relative"}
-            // alignItems={"center"}
-            // alignSelf={"center"}
-            top={5}
+            top={2}
           >
             24h
           </Typography>
-          <IoIosMore size={_700 ? 28 : 20} onClick={handleMyMenu}></IoIosMore>
+          {isAdmin ? (
+            <IoIosMore size={_700 ? 28 : 20} onClick={handleOpenMenu} />
+          ) : (
+            <IoIosMore size={_700 ? 28 : 20} />
+          )}
         </Stack>
       </Stack>
     </>
