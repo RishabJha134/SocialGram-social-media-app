@@ -8,7 +8,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { FaInstagram } from "react-icons/fa6";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { editProfileModel } from "../../../redux/slice";
 
@@ -18,6 +18,8 @@ const ProfileLayout = () => {
   const _700 = useMediaQuery("(min-width:700px)");
 
   const dispatch = useDispatch();
+  // const params = useParams();
+  // const { data } = useUserDetailsQuery(params.id);
   function handleOpenEditProfile() {
     dispatch(editProfileModel(true));
   }

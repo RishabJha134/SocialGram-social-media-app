@@ -47,6 +47,7 @@ const signin = async (req, res) => {
       httpOnly: true,
       sameSite: "none",
       secure: true,
+      partitioned: true,
     });
 
     res
@@ -89,6 +90,7 @@ const login = async (req, res) => {
       httpOnly: true,
       sameSite: "none",
       secure: true,
+      partitioned: true,
     });
 
     res
@@ -293,21 +295,27 @@ const searchUser = async (req, res) => {
   }
 };
 
-// logout user:-
 const logout = async (req, res) => {
-  // console.log(req.cookie("token"))
+  console.log("logout");
   try {
+    // Clear the cookie
     res.cookie("token", "", {
-      maxAge: Date.now(),
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
+      expires: new Date(0), // Set expiration to the past
+      httpOnly: true,       // Ensure cookie is not accessible via JS
+      sameSite: "none",     // For cross-origin requests
+      secure: true,         // Send cookie only over HTTPS
+      path: "/",            // Ensure the path matches where the cookie was set
+      partitioned: true,
     });
-    res.status(201).json({ msg: "Logged out successfully!" });
+
+    // Send a success response
+    res.status(200).json({ msg: "Logged out successfully!" });
   } catch (err) {
-    res.status(400).json({ msg: "Error in logout!", err: err.message });
+    // Handle errors
+    res.status(500).json({ msg: "Error in logout!", err: err.message });
   }
 };
+
 
 // my info:-
 const myInfo = async (req, res) => {

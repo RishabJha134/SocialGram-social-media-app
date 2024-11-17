@@ -14,39 +14,41 @@ import Replies from "./pages/protected/profile/Replies";
 import Repost from "./pages/protected/profile/Repost";
 import SinglePost from "./pages/protected/SinglePost";
 import { useSelector } from "react-redux";
+import { useMyInfoQuery } from "./redux/service";
 
 const App = () => {
   const { darkMode } = useSelector((state) => state.service);
-  const data = true;
+  const { data, isError } = useMyInfoQuery();
+  // const data = false;
+  console.log("useMyInfoQuery" + JSON.stringify(data));
+  console.log("isError" + isError);
+
+  if (isError || !data) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<Register></Register>}></Route>
+        </Routes>
+      </BrowserRouter>
+    );
+  }
   return (
     <>
-      <Box minHeight={"100vh"} className={darkMode?"mode":""}>
+      <Box minHeight={"100vh"} className={darkMode ? "mode" : ""}>
         <BrowserRouter>
           <Routes>
-            {data ? (
-              <Route path="/" element={<ProtectedLayout></ProtectedLayout>}>
-                <Route path="/" element={<Home></Home>} />
-                <Route path="post/:id" element={<SinglePost></SinglePost>} />
-                <Route path="search" element={<Search></Search>} />
+            <Route path="/" element={<ProtectedLayout></ProtectedLayout>}>
+              <Route path="/" element={<Home></Home>} />
+              <Route path="post/:id" element={<SinglePost></SinglePost>} />
+              <Route path="search" element={<Search></Search>} />
 
-                <Route
-                  path="/profile"
-                  element={<ProfileLayout></ProfileLayout>}
-                >
-                  <Route
-                    path="threads/:id"
-                    element={<Threads></Threads>}
-                  ></Route>
-                  <Route
-                    path="replies/:id"
-                    element={<Replies></Replies>}
-                  ></Route>
-                  <Route path="reposts/:id" element={<Repost></Repost>}></Route>
-                </Route>
+              <Route path="/profile" element={<ProfileLayout></ProfileLayout>}>
+                <Route path="threads/:id" element={<Threads></Threads>}></Route>
+                <Route path="replies/:id" element={<Replies></Replies>}></Route>
+                <Route path="reposts/:id" element={<Repost></Repost>}></Route>
               </Route>
-            ) : (
-              <Route path="/" element={<Register></Register>}></Route>
-            )}
+            </Route>
+
             <Route path="*" element={<Error></Error>}></Route>
           </Routes>
         </BrowserRouter>

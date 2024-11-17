@@ -5,39 +5,58 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLoginMutation, useSigninMutation } from "../redux/service";
 
 const Register = () => {
   const [login, setLogin] = useState(false);
   const _700 = useMediaQuery("(min-width:700px)");
+
+  // rtk query:-
+  const [signinUser, signinUserData] = useSigninMutation();
+  // this is a function api call:- signinUser jisme hum data pass kar sakte hai aur ye signinUserData aur ye hume api se response laakar deta hai {laoding,error,success};
+
+  const [loginUser, loginUserData] = useLoginMutation();
+
   function HandleToggleLogin() {
-    setUsername("");
+    setUserName("");
     setEmail("");
     setPassword("");
     setLogin((prev) => !prev);
   }
-  const [username, setUsername] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin() {
+  async function handleLogin() {
     // Implement login logic here
     const data = {
       email,
       password,
     };
     console.log(data);
+    await loginUser(data);
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     // Implement login logic here
     const data = {
-      username,
+      userName,
       email,
       password,
     };
     console.log(data);
+    await signinUser(data);
   }
+
+  useEffect(() => {
+    if (signinUserData.isSuccess) {
+      console.log(signinUserData.data);
+    }
+    if (loginUserData.isSuccess) {
+      console.log(loginUserData.data);
+    }
+  }, [signinUserData.isSuccess, loginUserData.isSuccess]);
   return (
     <>
       <Stack
@@ -49,7 +68,7 @@ const Register = () => {
       >
         <Stack
           flexDirection={"column"}
-          width={_700?"40%":"90%"}
+          width={_700 ? "40%" : "90%"}
           gap={2}
           mt={_700 ? 20 : 0}
           sx={
@@ -60,7 +79,7 @@ const Register = () => {
         >
           <Typography
             variant="h5"
-            fontSize={_700?"1.5rem":"1rem"}
+            fontSize={_700 ? "1.5rem" : "1rem"}
             fontWeight={"bold"}
             alignSelf={"center"}
           >
@@ -69,11 +88,11 @@ const Register = () => {
           {login ? null : (
             <TextField
               onChange={(e) => {
-                setUsername(e.target.value);
+                setUserName(e.target.value);
               }}
-              value={username}
+              value={userName}
               variant="outlined"
-              placeholder="Enter Your UserName..."
+              placeholder="Enter Your userName..."
             />
           )}
 
