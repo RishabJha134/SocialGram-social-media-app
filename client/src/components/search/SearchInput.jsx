@@ -1,9 +1,12 @@
 import { InputAdornment, TextField } from "@mui/material";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const SearchInput = () => {
   const { darkMode } = useSelector((state) => state.service);
+  const [query, setQuery] = useState();
+  const [searchUser, searchUserData] = useLazySearchUsersQuery();
   return (
     <TextField
       sx={{

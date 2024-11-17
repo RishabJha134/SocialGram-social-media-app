@@ -220,7 +220,8 @@ export const {
   useLogoutMeMutation,
   useUserDetailsQuery,
   useAllPostQuery,
-  useSearchUsersQuery,
+  // useSearchUsersQuery,
+  useLazySearchUsersQuery,    // jab hume kisi event par is query ko run karna ho.
   useFollowUserMutation,
   useAddCommentMutation,
   useDeleteCommentMutation,

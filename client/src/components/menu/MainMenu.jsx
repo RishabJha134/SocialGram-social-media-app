@@ -6,7 +6,7 @@ import { addMyInfo, toggleMainMenu, toggleThemeMode } from "../../redux/slice";
 import { useLogoutMeMutation } from "../../redux/service";
 
 const MainMenu = () => {
-  const { anchorE1 } = useSelector((state) => state.service);
+  const { anchorE1, myInfo } = useSelector((state) => state.service);
 
   // rtk query:-
   const [logoutMeUser, logoutMeUserData] = useLogoutMeMutation();
@@ -46,7 +46,7 @@ const MainMenu = () => {
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <MenuItem onClick={handleToggleTheme}> Toogle Theme</MenuItem>
-        <Link to={"/profile/threads/2"} className="link">
+        <Link to={`/profile/threads/${myInfo?._id}`} className="link">
           <MenuItem>My profile</MenuItem>
         </Link>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>

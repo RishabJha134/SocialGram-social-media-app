@@ -114,5 +114,7 @@ export const {
   deleteThePost,
   addPostId,
   addToSearchedUsers,
+  searchedUsers,
+  
 } = serviceSlice.actions;
 export default serviceSlice.reducer;
