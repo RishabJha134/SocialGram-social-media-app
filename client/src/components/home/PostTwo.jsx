@@ -26,7 +26,7 @@ const PostTwo = (data) => {
   const handleLike = async () => {
     await likePost(data.e?._id);
     // Refresh the page after the registration process is complete
-    window.location.reload();
+    // window.location.reload();
   };
 
   const checkIsLiked = () => {
@@ -46,7 +46,7 @@ const PostTwo = (data) => {
 
   useEffect(() => {
     checkIsLiked();
-  }, [data.e]);
+  }, [data.e, likePost]);
 
   useEffect(() => {
     if (repostData.isSuccess) {
