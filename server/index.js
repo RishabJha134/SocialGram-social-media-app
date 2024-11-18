@@ -21,10 +21,13 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // URL of your frontend
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Include necessary headers
-    credentials: true, // Allow cookies and auth headers
+    origin: [
+      "http://localhost:5173",
+      "https://socialgram-social-media-app-production.up.railway.app",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
