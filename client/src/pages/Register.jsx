@@ -40,6 +40,23 @@ const Register = () => {
     await loginUser(data);
   }
 
+  // async function handleRegister() {
+  //   // Implement login logic here
+  //   const data = {
+  //     userName,
+  //     email,
+  //     password,
+  //   };
+  //   console.log(data);
+
+  //   // Call the signinUser function to handle registration
+  //   await signinUser(data);
+
+  //   // Refresh the page after the registration process is complete
+  //   window.location.reload();
+  // }
+
+  
   async function handleRegister() {
     // Implement login logic here
     const data = {
@@ -48,6 +65,8 @@ const Register = () => {
       password,
     };
     console.log(data);
+
+    // Call the signinUser function to handle registration
     await signinUser(data);
   }
 
@@ -63,6 +82,8 @@ const Register = () => {
         theme: "colored",
         transition: Bounce,
       });
+      // Refresh the page after the registration process is complete
+      window.location.reload();
     }
     if (signinUserData.isError) {
       toast.error(signinUserData.error.data.msg, {
@@ -112,7 +133,6 @@ const Register = () => {
       </Stack>
     );
   }
-
 
   return (
     <>

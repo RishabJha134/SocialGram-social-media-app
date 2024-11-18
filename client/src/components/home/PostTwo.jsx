@@ -25,6 +25,8 @@ const PostTwo = (data) => {
 
   const handleLike = async () => {
     await likePost(data.e?._id);
+    // Refresh the page after the registration process is complete
+    window.location.reload();
   };
 
   const checkIsLiked = () => {

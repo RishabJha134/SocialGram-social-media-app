@@ -68,6 +68,8 @@ const AddPost = () => {
         theme: "colored",
         transition: Bounce,
       });
+      // Refresh the page after the add post process is complete
+      window.location.reload();
     }
     if (addNewPostData.isError) {
       // console.log("Error while adding post", addNewPostData.error);
@@ -79,7 +81,7 @@ const AddPost = () => {
         pauseOnHover: true,
         draggable: true,
         theme: "colored",
-        transition: Bounce, 
+        transition: Bounce,
       });
     }
   }, [addNewPostData.isSuccess, addNewPostData.isError]);

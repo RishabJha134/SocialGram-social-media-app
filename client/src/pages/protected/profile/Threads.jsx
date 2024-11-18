@@ -18,7 +18,7 @@ const Threads = () => {
               mx={"auto"}
             >
               {user.user.threads.map((e) => {
-                return <Post key={e._id} e={e} />;
+                return <Post key={e._id} post={e} />;
               })}
             </Stack>
           ) : (

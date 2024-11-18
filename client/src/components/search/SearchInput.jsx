@@ -1,6 +1,6 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useLazySearchUsersQuery } from "../../redux/service";
 import { addToSearchedUsers } from "../../redux/slice";
@@ -8,19 +8,27 @@ import { Bounce, toast } from "react-toastify";
 
 const SearchInput = () => {
   const { darkMode } = useSelector((state) => state.service);
-  const [query, setQuery] = useState();
-  const [searchUser, searchUserData] = useLazySearchUsersQuery();  // jab hume kisi event par is query ko run karna ho.
+  const [query, setQuery] = useState("");
+  const [searchUser, searchUserData] = useLazySearchUsersQuery();  // Lazy query hook
   const dispatch = useDispatch();
-  const handleSearch = async (e) => {
-    if (query && e.key === "Enter") {
-      await searchUser(query);
+
+  // Function to handle search on input change
+  const handleSearch = async () => {
+    if (query) {
+      await searchUser(query); // Make API call with the query
     }
   };
 
+  // Function to clear search input
+  const clearSearch = () => {
+    setQuery("");  // Clear the input field
+    dispatch(addToSearchedUsers([]));  // Optionally clear the search results in redux
+  };
+
+  // Watch the success or error from the API and handle responses
   useEffect(() => {
     if (searchUserData.isSuccess) {
-      // console.log("searchUserData.isSuccess" + searchUserData.isSuccess);
-      dispatch(addToSearchedUsers(searchUserData.data.users));
+      dispatch(addToSearchedUsers(searchUserData.data.users)); // Store search result in redux
       toast.success(searchUserData.data.msg, {
         position: "top-center",
         autoClose: 2500,
@@ -32,8 +40,8 @@ const SearchInput = () => {
         transition: Bounce,
       });
     }
+
     if (searchUserData.isError) {
-      // console.log("searchUserData.isError" + searchUserData.isError);
       toast.error(searchUserData.error.data.msg, {
         position: "top-center",
         autoClose: 2500,
@@ -45,7 +53,7 @@ const SearchInput = () => {
         transition: Bounce,
       });
     }
-  }, [searchUserData.isSuccess, searchUserData.isError]);
+  }, [searchUserData.isSuccess, searchUserData.isError, dispatch]);
 
   return (
     <TextField
@@ -58,7 +66,6 @@ const SearchInput = () => {
         py: 1,
         my: 5,
         mx: "auto",
-
         "& .MuiOutlinedInput-root": {
           color: darkMode ? "whitesmoke" : "black",
           "& fieldset": {
@@ -66,7 +73,7 @@ const SearchInput = () => {
           },
         },
       }}
-      placeholder="search user..."
+      placeholder="Search user..."
       InputProps={{
         startAdornment: (
           <InputAdornment
@@ -78,9 +85,19 @@ const SearchInput = () => {
             <FaSearch />
           </InputAdornment>
         ),
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton onClick={clearSearch} sx={{ padding: 0 }}>
+              <FaTimes color={darkMode ? "whitesmoke" : "black"} />
+            </IconButton>
+          </InputAdornment>
+        ),
       }}
-      onChange={(e) => setQuery(e.target.value)}
-      onKeyUp={handleSearch}
+      value={query}  // Binding the input value to the query state
+      onChange={(e) => {
+        setQuery(e.target.value);  // Update the query on every keystroke
+        handleSearch();            // Trigger search immediately on input change
+      }}
     />
   );
 };
