@@ -33,6 +33,10 @@ const PORT = process.env.PORT;
 // routes:-
 app.use("/api/v1", routes);
 
+app.get("/", (req, res) => {
+  res.send("Namastey Thread Server is running...");
+});
+
 connectDB();
 app.listen(PORT, (req, res) => {
   console.log(`app is listening on PORT ${PORT}`);
