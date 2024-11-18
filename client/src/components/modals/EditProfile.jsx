@@ -18,7 +18,8 @@ import {
   useUserDetailsQuery,
 } from "../../redux/service";
 import Loading from "./../common/Loading";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 
 const EditProfile = () => {
   const _700 = useMediaQuery("(min-width:700px)");
@@ -34,6 +35,7 @@ const EditProfile = () => {
   const imgRef = useRef();
 
   const [updateProfile, updateProfileData] = useUpdateProfileMutation();
+  console.log(params?.id);
   const { refetch } = useUserDetailsQuery(params?.id);
 
   const handlePhoto = () => {
@@ -45,13 +47,14 @@ const EditProfile = () => {
   const handleUpdate = async () => {
     if (pic || bio) {
       const data = new FormData();
+
       if (bio) {
         data.append("text", bio);
       }
       if (pic) {
         data.append("media", pic);
       }
-
+      console.log(data);
       await updateProfile(data);
     }
     dispatch(editProfileModel(false));
@@ -59,31 +62,31 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (updateProfileData.isSuccess) {
-      console.log("Profile updated successfully");
+      // console.log("Profile updated successfully");
       refetch();
-      // toast.success(updateProfileData.data.msg, {
-      //   position: "top-center",
-      //   autoClose: 2500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "colored",
-      //   transition: Bounce,
-      // });
+      toast.success(updateProfileData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
     if (updateProfileData.isError) {
-      console.log("Profile update error");
-      // toast.error(updateProfileData.error.data.msg, {
-      //   position: "top-center",
-      //   autoClose: 2500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "colored",
-      //   transition: Bounce,
-      // });
+      // console.log("Profile update error");
+      toast.error(updateProfileData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
   }, [updateProfileData.isError, updateProfileData.isSuccess]);
 

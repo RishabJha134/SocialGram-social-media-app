@@ -63,10 +63,12 @@ export const serviceApi = createApi({
         url: `user/${id}`,
         method: "GET",
       }),
-      providesTags: (result, error, { id }) => [{ type: "User", id }],
+      providesTags: ["User"],
+      // providesTags: (result, error, { id }) => [{ type: "User", id }],
       async onQueryStarted(params, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+          console.log(data);
           dispatch(addUser(data));
           console.log(data);
         } catch (err) {
@@ -221,7 +223,7 @@ export const {
   useUserDetailsQuery,
   useAllPostQuery,
   // useSearchUsersQuery,
-  useLazySearchUsersQuery,    // jab hume kisi event par is query ko run karna ho.
+  useLazySearchUsersQuery, // jab hume kisi event par is query ko run karna ho.
   useFollowUserMutation,
   useAddCommentMutation,
   useDeleteCommentMutation,

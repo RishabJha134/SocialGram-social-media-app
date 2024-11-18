@@ -141,7 +141,7 @@ const userDetails = async (req, res) => {
         ],
       });
 
-    res.status(200).json({ msg: "user details fetched!" }, user);
+    res.status(200).json({ msg: "user details fetched!",user });
   } catch (err) {
     res.status(400).json({ msg: "Error in userDetails !", err: err.message });
   }

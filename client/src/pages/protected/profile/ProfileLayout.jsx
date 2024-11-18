@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import {
   Avatar,
   Button,
@@ -9,8 +10,15 @@ import {
 } from "@mui/material";
 import { FaInstagram } from "react-icons/fa6";
 import { Link, Outlet, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editProfileModel } from "../../../redux/slice";
+// import { Helmet } from "react-helmet-async";
+import {
+  useFollowUserMutation,
+  useUserDetailsQuery,
+} from "../../../redux/service";
+import EditProfile from "./../../../components/modals/EditProfile";
+import { Bounce, toast } from "react-toastify";
 
 const ProfileLayout = () => {
   const _300 = useMediaQuery("(min-width:300px)");
@@ -18,14 +26,87 @@ const ProfileLayout = () => {
   const _700 = useMediaQuery("(min-width:700px)");
 
   const dispatch = useDispatch();
-  // const params = useParams();
-  // const { data } = useUserDetailsQuery(params.id);
+  const { darkMode, myInfo } = useSelector((state) => state.service);
+  const params = useParams();
+  console.log(params);
+  const { data } = useUserDetailsQuery(params?.id);
+  console.log(data);
+  const [followUser, followUserData] = useFollowUserMutation();
+  const [myAccount, setMyAccount] = useState();
+  const [isFollowing, setIsFollowing] = useState();
+
+  async function checkIsFollowing() {
+    if (data && myInfo) {
+      // mai jiski profile par hu agar us user ki followers ke andar meri id hai iska matlab hai ki mai usko follow karta hu:-
+      const isTrue = data.user.followers.filter((e) => e._id === myInfo._id);
+      if (isTrue.length > 0) {
+        setIsFollowing(true);
+        return;
+      }
+      setIsFollowing(false);
+    }
+  }
+
+  const checkIsMyAccount = () => {
+    if (data && myInfo) {
+      const isTrue = data.user._id === myInfo._id;
+      setMyAccount(isTrue);
+    }
+  };
+
+  const handleFollow = async () => {
+    if (data) {
+      await followUser(data.user._id);
+    }
+  };
+
   function handleOpenEditProfile() {
     dispatch(editProfileModel(true));
   }
 
+  useEffect(() => {
+    if (followUserData.isSuccess) {
+      toast.success(followUserData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
+    if (followUserData.isError) {
+      toast.error(followUserData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
+  }, [followUserData.isSuccess, followUserData.isError]);
+
+  useEffect(() => {
+    checkIsFollowing();
+    checkIsMyAccount();
+  }, [data]);
+
   return (
     <>
+      {/* <Helmet>
+        <title>
+          {data
+            ? data.user
+              ? data.user.userName + " | Threads Clone"
+              : "Threads Clone | App by Aditya Jawanjal"
+            : "Threads Clone | App by Aditya Jawanjal"}
+        </title>
+      </Helmet> */}
       <Stack
         flexDirection="column"
         gap={2}
@@ -45,7 +126,7 @@ const ProfileLayout = () => {
               fontWeight="bold"
               fontSize={_300 ? "2rem" : "1rem"}
             >
-              Aditya_5001
+              {data ? (data.user ? data.user.userName : "") : ""}
             </Typography>
             <Stack
               flexDirection={"row"}
@@ -54,7 +135,7 @@ const ProfileLayout = () => {
               alignItems={"center"}
             >
               <Typography variant="h6" fontSize={_300 ? "1rem" : "0.8rem"}>
-                Aditya_5001
+                {data ? (data.user ? data.user.email : "") : ""}
               </Typography>
               <Chip
                 label="threads.net"
@@ -64,13 +145,15 @@ const ProfileLayout = () => {
             </Stack>
           </Stack>
           <Avatar
-            src=""
-            alt="Profile avatar"
+            src={data ? (data.user ? data.user.profilePic : "") : ""}
+            alt={data ? (data.user ? data.user.userName : "") : ""}
             sx={{ width: _300 ? 60 : 40, height: _300 ? 60 : 40 }}
           />
         </Stack>
 
-        <Typography variant="subtitle2">This is a bio!</Typography>
+        <Typography variant="subtitle2">
+          {data ? (data.user ? data.user.bio : "") : ""}
+        </Typography>
 
         <Stack
           flexDirection="row"
@@ -78,7 +161,13 @@ const ProfileLayout = () => {
           alignItems="center"
         >
           <Typography variant="subtitle2" color="gray">
-            19 followers
+            {data
+              ? data.user
+                ? data.user.followers.length > 0
+                  ? `${data.user.followers.length} followers`
+                  : "No Followers"
+                : ""
+              : ""}
           </Typography>
           <FaInstagram size={_300 ? 40 : 24} />
         </Stack>
@@ -87,7 +176,7 @@ const ProfileLayout = () => {
       <Button
         size="large"
         sx={{
-          color: "black",
+          color: darkMode ? "whitesmoke" : "black",
           width: _700 ? "800px" : "90%",
           mx: "auto",
           textAlign: "center",
@@ -97,9 +186,9 @@ const ProfileLayout = () => {
             cursor: "pointer",
           },
         }}
-        onClick={handleOpenEditProfile}
+        onClick={myAccount ? handleOpenEditProfile : handleFollow}
       >
-        Edit Profile
+        {myAccount ? " Edit Profile" : isFollowing ? "unfollow" : "Follow user"}
       </Button>
 
       <Stack
@@ -112,18 +201,28 @@ const ProfileLayout = () => {
         width={_700 ? "800px" : "90%"}
         mx={"auto"}
       >
-        <Link to="/profile/threads/1" className="link">
+        <Link
+          to={`/profile/threads/${data?.user._id}`}
+          className={`link ${darkMode ? "mode" : ""}`}
+        >
           Threads
         </Link>
-        <Link to="/profile/replies/1" className="link">
+        <Link
+          to={`/profile/replies/${data?.user._id}`}
+          className={`link ${darkMode ? "mode" : ""}`}
+        >
           Replies
         </Link>
-        <Link to="/profile/reposts/1" className="link">
+        <Link
+          to={`/profile/reposts/${data?.user._id}`}
+          className={`link ${darkMode ? "mode" : ""}`}
+        >
           Reposts
         </Link>
       </Stack>
 
       <Outlet />
+      <EditProfile></EditProfile>
     </>
   );
 };

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMyMenu } from "../../redux/slice";
 import { useDeletePostMutation } from "../../redux/service";
+import { Bounce, toast } from "react-toastify";
 
 const MyMenu = () => {
   const { anchorE2, postId } = useSelector((state) => state.service);
@@ -19,10 +20,30 @@ const MyMenu = () => {
 
   useEffect(() => {
     if (deletePostData.isSuccess) {
-      console.log("deletePostData.isSuccess" + deletePostData.isSuccess);
+      // console.log("deletePostData.isSuccess" + deletePostData.isSuccess);
+      toast.warning(deletePostData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
     if (deletePostData.isError) {
-      console.log("deletePostData.isError" + deletePostData.isError);
+      // console.log("deletePostData.isError" + deletePostData.isError);
+      toast.error(deletePostData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
   }, [deletePostData.isSuccess, deletePostData.isError]);
 

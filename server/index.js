@@ -11,16 +11,22 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+// const corsOptions = {
+//   origin: 'http://localhost:5173', // Replace with your frontend's URL
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+//   credentials: true // Allow cookies/auth headers
+// };
 
-const corsOptions = {
-  origin: 'http://localhost:5173', // Replace with your frontend's URL
-  // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-  credentials: true // Allow cookies/auth headers
-};
+// app.use(cors(corsOptions));
 
-app.use(cors(corsOptions));
-
-
+app.use(
+  cors({
+    origin: "http://localhost:5173", // URL of your frontend
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Include necessary headers
+    credentials: true, // Allow cookies and auth headers
+  })
+);
 
 const PORT = process.env.PORT;
 

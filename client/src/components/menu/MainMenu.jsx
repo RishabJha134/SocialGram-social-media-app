@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addMyInfo, toggleMainMenu, toggleThemeMode } from "../../redux/slice";
 import { useLogoutMeMutation } from "../../redux/service";
+import { Bounce, toast } from "react-toastify";
 
 const MainMenu = () => {
   const { anchorE1, myInfo } = useSelector((state) => state.service);
@@ -28,14 +29,33 @@ const MainMenu = () => {
   };
 
   useEffect(() => {
-    console.log("logoutMeUserData.isSuccess" + logoutMeUserData.isSuccess);
     if (logoutMeUserData.isSuccess) {
-      // dispatch(addMyInfo(null));
-      window.location.reload();
-      console.log("Logged out" + logoutMeUserData);
-      console.log("Logged out" + logoutMeUserData.data);
+      toast.warning(logoutMeUserData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
+
     }
-  }, [logoutMeUserData.isSuccess]);
+    if (logoutMeUserData.isError) {
+      toast.error(logoutMeUserData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
+
+    }
+  }, [logoutMeUserData.isSuccess,logoutMeUserData.isError]);
   return (
     <>
       <Menu

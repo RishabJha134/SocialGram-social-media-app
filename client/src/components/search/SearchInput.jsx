@@ -1,12 +1,52 @@
 import { InputAdornment, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useLazySearchUsersQuery } from "../../redux/service";
+import { addToSearchedUsers } from "../../redux/slice";
+import { Bounce, toast } from "react-toastify";
 
 const SearchInput = () => {
   const { darkMode } = useSelector((state) => state.service);
   const [query, setQuery] = useState();
-  const [searchUser, searchUserData] = useLazySearchUsersQuery();
+  const [searchUser, searchUserData] = useLazySearchUsersQuery();  // jab hume kisi event par is query ko run karna ho.
+  const dispatch = useDispatch();
+  const handleSearch = async (e) => {
+    if (query && e.key === "Enter") {
+      await searchUser(query);
+    }
+  };
+
+  useEffect(() => {
+    if (searchUserData.isSuccess) {
+      // console.log("searchUserData.isSuccess" + searchUserData.isSuccess);
+      dispatch(addToSearchedUsers(searchUserData.data.users));
+      toast.success(searchUserData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
+    if (searchUserData.isError) {
+      // console.log("searchUserData.isError" + searchUserData.isError);
+      toast.error(searchUserData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
+  }, [searchUserData.isSuccess, searchUserData.isError]);
+
   return (
     <TextField
       sx={{
@@ -39,6 +79,8 @@ const SearchInput = () => {
           </InputAdornment>
         ),
       }}
+      onChange={(e) => setQuery(e.target.value)}
+      onKeyUp={handleSearch}
     />
   );
 };

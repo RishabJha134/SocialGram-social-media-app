@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPostModel } from "../../redux/slice";
 import { useAddPostMutation } from "../../redux/service";
 import Loading from "./../common/Loading";
+import { Bounce, toast } from "react-toastify";
 
 const AddPost = () => {
   const _700 = useMediaQuery("(min-width:700px)");
@@ -56,10 +57,30 @@ const AddPost = () => {
       setText();
       setMedia();
       dispatch(addPostModel(false));
-      console.log("Post added successfully");
+      // console.log("Post added successfully");
+      toast.success(addNewPostData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
     if (addNewPostData.isError) {
-      console.log("Error while adding post", addNewPostData.error);
+      // console.log("Error while adding post", addNewPostData.error);
+      toast.error(addNewPostData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce, 
+      });
     }
   }, [addNewPostData.isSuccess, addNewPostData.isError]);
   return (
@@ -90,15 +111,17 @@ const AddPost = () => {
 
             <DialogContent>
               <Stack flexDirection={"row"} gap={2} mb={5}>
-                <Avatar src={myInfo ? myInfo.profilePic : ""}
-                  alt={myInfo ? myInfo.userName : ""}></Avatar>
+                <Avatar
+                  src={myInfo ? myInfo.profilePic : ""}
+                  alt={myInfo ? myInfo.userName : ""}
+                ></Avatar>
                 <Stack>
                   <Typography
                     variant="h6"
                     fontWeight={"bold"}
                     fontSize={"1rem"}
                   >
-                   {myInfo ? myInfo.userName : ""}
+                    {myInfo ? myInfo.userName : ""}
                   </Typography>
                   <textarea
                     cols={_500 ? "40" : "25"}
@@ -164,6 +187,4 @@ const AddPost = () => {
   );
 };
 
-
 export default AddPost;
-

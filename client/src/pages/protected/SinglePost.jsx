@@ -4,6 +4,7 @@ import Post from "../../components/home/Post";
 import Comment from "../../components/home/Comment";
 import { useParams } from "react-router-dom";
 import { useAddCommentMutation, useSinglePostQuery } from "../../redux/service";
+import { Bounce, toast } from "react-toastify";
 
 const SinglePost = () => {
   const params = useParams();
@@ -28,10 +29,30 @@ const SinglePost = () => {
     if (addCommentData.isSuccess) {
       setComment("");
       refetch(); // refetching the post data after adding comment.
+      toast.success(addCommentData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
     if (addCommentData.isError) {
-      console.log("Error in adding comment", addCommentData.error);
+      // console.log("Error in adding comment", addCommentData.error);
       // setComment(""); // resetting comment text if error occurs.
+      toast.error(addCommentData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
   }, [addCommentData.isSuccess, addCommentData.isError]);
 

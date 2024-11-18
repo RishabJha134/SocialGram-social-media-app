@@ -9,7 +9,7 @@ const Search = () => {
   return (
     <>
       <SearchInput />
-      <Stack flexDirection={"column"} gap={1} mb={5} width={"100%"} mx={"auto"}>
+      <Stack flexDirection={"column"} gap={1} mb={5} width={"50%"} mx={"auto"}>
         {searchedUsers ? (
           searchedUsers.length > 0 ? (
             searchedUsers.map((e) => {

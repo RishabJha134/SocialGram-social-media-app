@@ -5,13 +5,14 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLikePostMutation, useRepostMutation } from "../../redux/service";
 import { useEffect, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 // import { Bounce, toast } from "react-toastify";
 
 const PostTwo = (data) => {
   console.log(data.e);
   const { darkMode, myInfo } = useSelector((state) => state.service);
 
-  const [likePost,likePostData] = useLikePostMutation();
+  const [likePost, likePostData] = useLikePostMutation();
   console.log(JSON.stringify(likePostData));
   const [repost, repostData] = useRepostMutation();
 
@@ -47,30 +48,30 @@ const PostTwo = (data) => {
 
   useEffect(() => {
     if (repostData.isSuccess) {
-      console.log("repost success")
-      // toast.success(repostData.data.msg, {
-      //   position: "top-center",
-      //   autoClose: 2500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "colored",
-      //   transition: Bounce,
-      // });
+      console.log("repost success");
+      toast.success(repostData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
     if (repostData.isError) {
-      console.log("repost error")
-      // toast.success(repostData.error.data.msg, {
-      //   position: "top-center",
-      //   autoClose: 2500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "colored",
-      //   transition: Bounce,
-      // });
+      console.log("repost error");
+      toast.success(repostData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
   }, [repostData.isSuccess, repostData.isError]);
 

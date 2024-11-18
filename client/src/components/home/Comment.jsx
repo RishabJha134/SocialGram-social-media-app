@@ -13,6 +13,7 @@ import {
   useDeleteCommentMutation,
   useSinglePostQuery,
 } from "../../redux/service";
+import { Bounce, toast } from "react-toastify";
 // import { Bounce, toast } from "react-toastify";
 // import { FaBedPulse } from "react-icons/fa6";
 
@@ -59,29 +60,29 @@ const Comments = (data) => {
   useEffect(() => {
     if (deleteCommentData.isSuccess) {
       console.log("deleteCommentData.isSuccess" + deleteCommentData.isSuccess);
-      // toast.success(deleteCommentData.data.msg, {
-      //   position: "top-center",
-      //   autoClose: 2500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "colored",
-      //   transition: Bounce,
-      // });
+      toast.success(deleteCommentData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
     if (deleteCommentData.isError) {
       console.log("deleteCommentData.isError" + deleteCommentData.isError);
-      // toast.error(deleteCommentData.error.data.msg, {
-      //   position: "top-center",
-      //   autoClose: 2500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "colored",
-      //   transition: Bounce,
-      // });
+      toast.error(deleteCommentData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
   }, [deleteCommentData.isSuccess, deleteCommentData.isError]);
 

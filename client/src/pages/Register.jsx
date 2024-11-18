@@ -7,6 +7,8 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLoginMutation, useSigninMutation } from "../redux/service";
+import { Bounce, toast } from "react-toastify";
+import Loading from "../components/common/Loading";
 
 const Register = () => {
   const [login, setLogin] = useState(false);
@@ -51,12 +53,67 @@ const Register = () => {
 
   useEffect(() => {
     if (signinUserData.isSuccess) {
-      console.log(signinUserData.data);
+      toast.success(signinUserData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
+    if (signinUserData.isError) {
+      toast.error(signinUserData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
+  }, [signinUserData.isSuccess, signinUserData.isError]);
+
+  useEffect(() => {
     if (loginUserData.isSuccess) {
-      console.log(loginUserData.data);
+      toast.success(loginUserData.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
-  }, [signinUserData.isSuccess, loginUserData.isSuccess]);
+    if (loginUserData.isError) {
+      toast.error(loginUserData.error.data.msg, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
+  }, [loginUserData.isSuccess, loginUserData.isError]);
+
+  if (signinUserData.isLoading || loginUserData.isLoading) {
+    return (
+      <Stack height={"90vh"} alignItems={"center"} justifyContent={"center"}>
+        <Loading />
+      </Stack>
+    );
+  }
+
+
   return (
     <>
       <Stack
