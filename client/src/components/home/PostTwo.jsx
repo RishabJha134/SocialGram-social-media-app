@@ -6,17 +6,15 @@ import { Link } from "react-router-dom";
 import { useLikePostMutation, useRepostMutation } from "../../redux/service";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
-// import { Bounce, toast } from "react-toastify";
 
 const PostTwo = (data) => {
-  console.log(data.e);
+  const {e} = data;
   const { darkMode, myInfo } = useSelector((state) => state.service);
 
-  const [likePost, likePostData] = useLikePostMutation();
-  console.log(JSON.stringify(likePostData));
+  const [likePost] = useLikePostMutation();
   const [repost, repostData] = useRepostMutation();
 
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState();
 
   const _300 = useMediaQuery("(min-width:300px)");
   const _400 = useMediaQuery("(min-width:400px)");
@@ -24,14 +22,12 @@ const PostTwo = (data) => {
   const _700 = useMediaQuery("(min-width:700px)");
 
   const handleLike = async () => {
-    await likePost(data.e?._id);
-    // Refresh the page after the registration process is complete
-    // window.location.reload();
+    await likePost(e?._id);
   };
 
   const checkIsLiked = () => {
-    if (data.e?.likes.length > 0) {
-      const variable = data.e.likes.filter((ele) => ele._id === myInfo._id);
+    if (e?.likes.length > 0) {
+      const variable = e.likes.filter((ele) => ele._id === myInfo._id);
       if (variable.length > 0) {
         setIsLiked(true);
         return;
@@ -41,16 +37,15 @@ const PostTwo = (data) => {
   };
 
   const handleRepost = async () => {
-    await repost(data.e?._id);
+    await repost(e?._id);
   };
 
   useEffect(() => {
     checkIsLiked();
-  }, [data.e, likePost]);
+  }, [e]);
 
   useEffect(() => {
     if (repostData.isSuccess) {
-      console.log("repost success");
       toast.success(repostData.data.msg, {
         position: "top-center",
         autoClose: 2500,
@@ -63,7 +58,6 @@ const PostTwo = (data) => {
       });
     }
     if (repostData.isError) {
-      console.log("repost error");
       toast.success(repostData.error.data.msg, {
         position: "top-center",
         autoClose: 2500,
@@ -87,9 +81,9 @@ const PostTwo = (data) => {
               fontSize={_300 ? "1rem" : "0.8rem"}
               fontWeight={"bold"}
             >
-              {data.e ? data.e.admin.userName : ""}
+              {e ? e.admin.userName : ""}
             </Typography>
-            <Link to={`/post/${data.e?._id}`} className="link">
+            <Link to={`/post/${e?._id}`} className="link">
               <Typography
                 variant="h5"
                 fontSize={
@@ -97,15 +91,15 @@ const PostTwo = (data) => {
                 }
                 className={darkMode ? "mode" : ""}
               >
-                {data.e ? data.e.text : ""}
+                {e ? e.text : ""}
               </Typography>
             </Link>
           </Stack>
-          {data.e ? (
-            data.e.media ? (
+          {e ? (
+            e.media ? (
               <img
-                src={data.e?.media}
-                alt={data.e?.media}
+                src={e?.media}
+                alt={e?.media}
                 loading="lazy"
                 width={
                   _700
@@ -134,7 +128,7 @@ const PostTwo = (data) => {
               />
             )}
 
-            <Link to={`/post/${data.e?._id}#comment`} className="link">
+            <Link to={`/post/${e?._id}#comment`} className="link">
               <FaRegComment size={_700 ? 32 : _300 ? 28 : 24} />
             </Link>
             <FaRetweet
@@ -150,14 +144,14 @@ const PostTwo = (data) => {
             top={-3}
             left={4}
           >
-            {data.e ? (
-              data.e.likes.length > 0 ? (
+            {e ? (
+              e.likes.length > 0 ? (
                 <Typography
                   variant="caption"
                   color={darkMode ? "white" : "GrayText"}
                   fontSize={_700 ? "1.1rem" : "1rem"}
                 >
-                  {data.e.likes.length} likes .
+                  {e.likes.length} likes .
                 </Typography>
               ) : (
                 ""
@@ -165,14 +159,14 @@ const PostTwo = (data) => {
             ) : (
               ""
             )}
-            {data.e ? (
-              data.e.comments.length > 0 ? (
+            {e ? (
+              e.comments.length > 0 ? (
                 <Typography
                   variant="caption"
                   color={darkMode ? "white" : "GrayText"}
                   fontSize={_700 ? "1.1rem" : "1rem"}
                 >
-                  {data.e.comments.length} comment{" "}
+                  {e.comments.length} comment{" "}
                 </Typography>
               ) : (
                 ""
