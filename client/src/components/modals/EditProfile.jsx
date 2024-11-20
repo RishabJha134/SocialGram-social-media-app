@@ -35,7 +35,7 @@ const EditProfile = () => {
   const imgRef = useRef();
 
   const [updateProfile, updateProfileData] = useUpdateProfileMutation();
-  console.log(params?.id);
+  // console.log(params?.id);
   const { refetch } = useUserDetailsQuery(params?.id || "");
 
   const handlePhoto = () => {
@@ -54,7 +54,7 @@ const EditProfile = () => {
       if (pic) {
         data.append("media", pic);
       }
-      console.log(data);
+      // console.log(data);
       await updateProfile(data);
     }
     dispatch(editProfileModel(false));

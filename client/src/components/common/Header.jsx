@@ -10,7 +10,7 @@ const Header = () => {
   const { darkMode } = useSelector((state) => state.service);
   const dispatch = useDispatch();
   function handleToggleMainMenu(e) {
-    console.log(e.currentTarget);
+    // console.log(e.currentTarget);
     dispatch(toggleMainMenu(e.currentTarget));
   }
 

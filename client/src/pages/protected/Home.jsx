@@ -11,7 +11,6 @@ const Home = () => {
   const [showMore, setShowMore] = useState(true);
   const { data, isLoading } = useAllPostQuery(page);
   const { allPosts } = useSelector((state) => state.service);
-  console.log(allPosts)
 
   const handleClick = () => {
     setPage((pre) => pre + 1);
@@ -32,8 +31,7 @@ const Home = () => {
         {allPosts ? (
           allPosts.length > 0 ? (
             allPosts.map((e) => {
-              console.log(JSON.stringify(e));
-              return <Post key={e._id} post={e} />;
+              return <Post key={e._id} e={e} />;
             })
           ) : (
             <Typography variant="caption" textAlign={"center"}>

@@ -28,9 +28,9 @@ const ProfileLayout = () => {
   const dispatch = useDispatch();
   const { darkMode, myInfo } = useSelector((state) => state.service);
   const params = useParams();
-  console.log(params);
+  // console.log(params);
   const { data } = useUserDetailsQuery(params?.id);
-  console.log(data);
+  // console.log(data);
   const [followUser, followUserData] = useFollowUserMutation();
   const [myAccount, setMyAccount] = useState();
   const [isFollowing, setIsFollowing] = useState();

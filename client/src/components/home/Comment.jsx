@@ -59,7 +59,7 @@ const Comments = (data) => {
 
   useEffect(() => {
     if (deleteCommentData.isSuccess) {
-      console.log("deleteCommentData.isSuccess" + deleteCommentData.isSuccess);
+      // console.log("deleteCommentData.isSuccess" + deleteCommentData.isSuccess);
       toast.success(deleteCommentData.data.msg, {
         position: "top-center",
         autoClose: 2500,
@@ -72,7 +72,7 @@ const Comments = (data) => {
       });
     }
     if (deleteCommentData.isError) {
-      console.log("deleteCommentData.isError" + deleteCommentData.isError);
+      // console.log("deleteCommentData.isError" + deleteCommentData.isError);
       toast.error(deleteCommentData.error.data.msg, {
         position: "top-center",
         autoClose: 2500,

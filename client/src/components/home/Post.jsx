@@ -1,14 +1,13 @@
 import { Stack, Typography, useMediaQuery } from "@mui/material";
 import { IoIosMore } from "react-icons/io";
 import PostOne from "./PostOne";
-import PostTwo from "./PostTwo";
+import PostTwo from "./postTwo";
 import { useDispatch, useSelector } from "react-redux";
 import { addPostId, toggleMyMenu } from "../../redux/slice";
 import { useEffect, useState } from "react";
 
 const Post = (data) => {
-  // console.log(data);
-  // console.log(JSON.stringify(data.post.admin._id));
+  const { e } = data;
   const { darkMode, myInfo } = useSelector((state) => state.service);
 
   const [isAdmin, setIsAdmin] = useState();
@@ -20,12 +19,12 @@ const Post = (data) => {
   const dispatch = useDispatch();
 
   const handleOpenMenu = (event) => {
-    dispatch(addPostId(data.post._id));
+    dispatch(addPostId(e._id));
     dispatch(toggleMyMenu(event.currentTarget));
   };
 
   const checkIsAdmin = () => {
-    if (data.post?.admin._id === myInfo._id) {
+    if (e?.admin._id === myInfo._id) {
       setIsAdmin(true);
       return;
     }
@@ -33,10 +32,10 @@ const Post = (data) => {
   };
 
   useEffect(() => {
-    if (data.post && myInfo) {
+    if (e && myInfo) {
       checkIsAdmin();
     }
-  }, [data.post, myInfo]);
+  }, [e, myInfo]);
 
   return (
     <>
@@ -56,8 +55,8 @@ const Post = (data) => {
         }}
       >
         <Stack flexDirection={"row"} gap={_700 ? 2 : 1}>
-          <PostOne e={data.post} />
-          <PostTwo e={data.post} />
+          <PostOne e={e} />
+          <PostTwo e={e} />
         </Stack>
         <Stack
           flexDirection={"row"}

@@ -19,10 +19,10 @@ import { useMyInfoQuery } from "./redux/service";
 const App = () => {
   const { darkMode } = useSelector((state) => state.service);
   const { data, isError, isLoading } = useMyInfoQuery();
-  console.log(isLoading);
+  // console.log(isLoading);
   // const data = false;
-  console.log("useMyInfoQuery" + JSON.stringify(data));
-  console.log("isError" + isError);
+  // console.log("useMyInfoQuery" + JSON.stringify(data));
+  // console.log("isError" + isError);
 
   if (isLoading) {
     return <Loading />;

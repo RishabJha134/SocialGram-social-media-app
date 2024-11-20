@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 
 const PostOne = (data) => {
-  const {e} = data;
+  const { e } = data;
   const _700 = useMediaQuery("(min-width:700px)");
 
   return (

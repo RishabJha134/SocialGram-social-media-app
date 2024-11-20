@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
 const PostTwo = (data) => {
-  const {e} = data;
+  const { e } = data;
   const { darkMode, myInfo } = useSelector((state) => state.service);
 
   const [likePost] = useLikePostMutation();
@@ -23,6 +23,7 @@ const PostTwo = (data) => {
 
   const handleLike = async () => {
     await likePost(e?._id);
+    window.location.reload();
   };
 
   const checkIsLiked = () => {

@@ -168,12 +168,12 @@ export const serviceApi = createApi({
         url: `post/like/${id}`,
         method: "PUT",
       }),
-      // invalidatesTags: (result, error, { id }) => [
-      //   {
-      //     type: "Post",
-      //     id,
-      //   },
-      // ],
+      invalidatesTags: (result, error, { id }) => [
+        {
+          type: "Post",
+          id,
+        },
+      ],
     }),
     singlePost: builder.query({
       query: (id) => ({

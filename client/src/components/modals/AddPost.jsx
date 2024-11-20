@@ -24,7 +24,7 @@ const AddPost = () => {
 
   const { openAddPostModel, myInfo } = useSelector((state) => state.service); // service slice ka state(data) select karke use kar rahe hai.
   // console.log(store);
-  console.log(openAddPostModel);
+  // console.log(openAddPostModel);
   const dispatch = useDispatch();
 
   const [addNewPost, addNewPostData] = useAddPostMutation();
@@ -33,11 +33,11 @@ const AddPost = () => {
   const [media, setMedia] = useState();
   const mediaRef = useRef();
   function handleClose() {
-    console.log("handleClose");
+    // console.log("handleClose");
     dispatch(addPostModel(false));
   }
   function handleMediaRef() {
-    console.log(mediaRef.current);
+    // console.log(mediaRef.current);
     mediaRef.current.click();
   }
   async function handlePost() {

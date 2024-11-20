@@ -11,9 +11,9 @@ const MainMenu = () => {
 
   // rtk query:-
   const [logoutMeUser, logoutMeUserData] = useLogoutMeMutation();
-  console.log("logoutMeUserData", JSON.stringify(logoutMeUserData));
+  // console.log("logoutMeUserData", JSON.stringify(logoutMeUserData));
 
-  console.log(anchorE1);
+  // console.log(anchorE1);
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(toggleMainMenu(null));
