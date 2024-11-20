@@ -15,6 +15,7 @@ import Repost from "./pages/protected/profile/Repost";
 import SinglePost from "./pages/protected/SinglePost";
 import { useSelector } from "react-redux";
 import { useMyInfoQuery } from "./redux/service";
+import FollowersPage from "./pages/protected/profile/Followers";
 
 const App = () => {
   const { darkMode } = useSelector((state) => state.service);
@@ -47,6 +48,10 @@ const App = () => {
               <Route path="/" element={<Home></Home>} />
               <Route path="post/:id" element={<SinglePost></SinglePost>} />
               <Route path="search" element={<Search></Search>} />
+              <Route
+                path="follower/:userId"
+                element={<FollowersPage></FollowersPage>}
+              />
 
               <Route path="/profile" element={<ProfileLayout></ProfileLayout>}>
                 <Route path="threads/:id" element={<Threads></Threads>}></Route>

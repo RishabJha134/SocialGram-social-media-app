@@ -147,7 +147,7 @@ const Register = () => {
           flexDirection={"column"}
           width={_700 ? "40%" : "90%"}
           gap={2}
-          mt={_700 ? 20 : 0}
+          mt={_700 ? 20 : 20}
           sx={
             {
               // backgroundColor:"Red"

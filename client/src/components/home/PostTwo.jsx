@@ -76,15 +76,17 @@ const PostTwo = (data) => {
     <>
       <Stack flexDirection={"column"} justifyContent={"space-between"}>
         <Stack flexDirection={"column"} gap={2}>
-          <Stack flexDirection={"column"}>
-            <Typography
-              variant="h6"
-              fontSize={_300 ? "1rem" : "0.8rem"}
-              fontWeight={"bold"}
-            >
-              {e ? e.admin.userName : ""}
-            </Typography>
-            <Link to={`/post/${e?._id}`} className="link">
+          <Link to={`/post/${e?._id}`} className="link">
+            <Stack flexDirection={"column"}>
+              <Typography
+                className={darkMode ? "mode" : ""}
+                variant="h6"
+                fontSize={_300 ? "1rem" : "0.8rem"}
+                fontWeight={"bold"}
+              >
+                {e ? e.admin.userName : ""}
+              </Typography>
+              {/* <Link to={`/post/${e?._id}`} className="link"> */}
               <Typography
                 variant="h5"
                 fontSize={
@@ -94,8 +96,10 @@ const PostTwo = (data) => {
               >
                 {e ? e.text : ""}
               </Typography>
-            </Link>
-          </Stack>
+              {/* </Link> */}
+            </Stack>
+          </Link>
+
           {e ? (
             e.media ? (
               <img
@@ -129,7 +133,7 @@ const PostTwo = (data) => {
               />
             )}
 
-            <Link to={`/post/${e?._id}#comment`} className="link">
+            <Link to={`/post/${e?._id}`} className="link">
               <FaRegComment size={_700 ? 32 : _300 ? 28 : 24} />
             </Link>
             <FaRetweet

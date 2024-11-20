@@ -27,10 +27,13 @@ const ProfileLayout = () => {
 
   const dispatch = useDispatch();
   const { darkMode, myInfo } = useSelector((state) => state.service);
+
   const params = useParams();
   // console.log(params);
   const { data } = useUserDetailsQuery(params?.id);
-  // console.log(data);
+  console.log(
+    "useUserDetailsQuery" + JSON.stringify(data?.user.followers.length)
+  );
   const [followUser, followUserData] = useFollowUserMutation();
   const [myAccount, setMyAccount] = useState();
   const [isFollowing, setIsFollowing] = useState();
@@ -160,15 +163,32 @@ const ProfileLayout = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography variant="subtitle2" color="gray">
-            {data
-              ? data.user
-                ? data.user.followers.length > 0
-                  ? `${data.user.followers.length} followers`
-                  : "No Followers"
-                : ""
-              : ""}
-          </Typography>
+          <Link
+            to={`/follower/${data?.user?._id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Typography
+              variant="subtitle2"
+              color="black"
+              fontSize={20}
+              sx={{
+                cursor: "pointer",
+                transition: "color 0.3s ease, transform 0.2s ease",
+                "&:hover": {
+                  color: "black",
+                  transform: "scale(1.05)", // Slight zoom effect
+                },
+                "&:active": {
+                  transform: "scale(0.95)", // Button press effect
+                },
+              }}
+            >
+              {data?.user?.followers?.length > 0
+                ? `${data.user.followers.length} followers`
+                : "No Followers"}
+            </Typography>
+          </Link>
+
           <FaInstagram size={_300 ? 40 : 24} />
         </Stack>
       </Stack>

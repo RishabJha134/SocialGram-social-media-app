@@ -24,6 +24,17 @@
   font-size: 1rem;
   margin-bottom: 20px;
 }
+.text2 {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  position: relative;
+  left: -10px;
+  background-color: antiquewhite;
+  /* color: gray; */
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
 .file-input {
   display: none;
 }

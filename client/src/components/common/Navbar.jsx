@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { darkMode, myInfo } = useSelector((state) => state.service);
+  // console.log(myInfo);
 
   const _300 = useMediaQuery("(min-width:300px)");
   const _700 = useMediaQuery("(min-width:700px)");
@@ -22,7 +23,7 @@ const Navbar = () => {
   const [showArrow, setShowArrow] = useState(false);
 
   const checkArrow = () => {
-    if (window.location.pathname.includes("/post/") && _700) {
+    if (window.location.pathname.includes("/post/") || window.location.pathname.includes("/follower") && _700) {
       setShowArrow(true);
       return;
     }
@@ -72,7 +73,10 @@ const Navbar = () => {
           color={darkMode ? "white" : "black"}
           onClick={handleAddPost}
         />
-        <CiHeart size={_300 ? 32 : 24} color={darkMode ? "white" : "black"} />
+        <Link to={`follower/${myInfo._id}`} className="link">
+          <CiHeart size={_300 ? 32 : 24} color={darkMode ? "white" : "black"} />
+        </Link>
+
         <Link to={`/profile/threads/${myInfo?._id}`} className="link">
           <RxAvatar
             size={_300 ? 32 : 24}

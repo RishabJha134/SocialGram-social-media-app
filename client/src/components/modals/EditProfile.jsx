@@ -197,7 +197,8 @@ const EditProfile = () => {
                 </Typography>
                 <input
                   type="text"
-                  className="text1"
+                  // className="px-[5px] py-[10px] text-[1rem] mb-[20px] bg-slate-400 text-black border border-red-800"
+                  className="text2"
                   placeholder={myInfo ? myInfo.bio : ""}
                   value={bio ? bio : ""}
                   onChange={(e) => setBio(e.target.value)}

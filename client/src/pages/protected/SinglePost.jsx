@@ -59,7 +59,7 @@ const SinglePost = () => {
   return (
     <>
       <Stack flexDirection={"column"} my={5} gap={2}>
-        <Post post={data?.post}></Post>
+        <Post e={data?.post}></Post>
         <Stack flexDirection={"column"} gap={2} width={"80%"} mx={"auto"}>
           {data
             ? data.post?.comments.length > 0
