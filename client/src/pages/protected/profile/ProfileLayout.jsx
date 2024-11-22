@@ -4,6 +4,7 @@ import {
   Avatar,
   Button,
   Chip,
+  IconButton,
   Stack,
   Typography,
   useMediaQuery,
@@ -11,7 +12,7 @@ import {
 import { FaInstagram } from "react-icons/fa6";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editProfileModel } from "../../../redux/slice";
+import { editProfileModel, toggleChatBot } from "../../../redux/slice";
 // import { Helmet } from "react-helmet-async";
 import {
   useFollowUserMutation,
@@ -19,6 +20,9 @@ import {
 } from "../../../redux/service";
 import EditProfile from "./../../../components/modals/EditProfile";
 import { Bounce, toast } from "react-toastify";
+import MagicAI from "../../../components/common/MagicAI";
+// import MagicAI from './../../../components/common/MagicAI';
+import { AiOutlineRobot } from "react-icons/ai";
 
 const ProfileLayout = () => {
   const _300 = useMediaQuery("(min-width:300px)");
@@ -26,7 +30,7 @@ const ProfileLayout = () => {
   const _700 = useMediaQuery("(min-width:700px)");
 
   const dispatch = useDispatch();
-  const { darkMode, myInfo } = useSelector((state) => state.service);
+  const { darkMode, myInfo, openBot } = useSelector((state) => state.service);
 
   const params = useParams();
   // console.log(params);
@@ -65,6 +69,11 @@ const ProfileLayout = () => {
 
   function handleOpenEditProfile() {
     dispatch(editProfileModel(true));
+  }
+
+  function handleBot() {
+    console.log("Bot from home page");
+    dispatch(toggleChatBot());
   }
 
   useEffect(() => {
@@ -189,7 +198,39 @@ const ProfileLayout = () => {
             </Typography>
           </Link>
 
-          <FaInstagram size={_300 ? 40 : 24} />
+          {/* please here add my here magic ai logic please create a magic ai icon when user click on the icon then open a 
+        text area input field then user enter the prompt for search from the magic ai by help of this api:-
+         */}
+
+          {/* {openBot ? <MagicAI></MagicAI> : <></>} */}
+          {openBot ? (
+            <MagicAI></MagicAI>
+          ) : (
+            <IconButton
+              onClick={handleBot}
+              sx={{
+                // Background color based on mode
+                bgcolor: darkMode ? "#2E2E2E" : "orange",
+                // Icon color based on mode
+                color: darkMode ? "orange" : "#2D2D2D",
+                ":hover": {
+                  // Hover background color based on mode
+                  bgcolor: darkMode ? "#37474F" : "#E0F7FA",
+                  // Hover icon color based on mode
+                  color: darkMode ? "#81D4FA" : "#006064",
+                },
+                position: "relative",
+                top: -26,
+                right: 1,
+                width: 60,
+                height: 60,
+                borderRadius: "50%", // Makes the button circular
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Subtle shadow for depth
+              }}
+            >
+              <AiOutlineRobot size={30} />
+            </IconButton>
+          )}
         </Stack>
       </Stack>
 

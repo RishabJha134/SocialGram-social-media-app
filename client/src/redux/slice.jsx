@@ -12,6 +12,7 @@ export const serviceSlice = createSlice({
     allPosts: [],
     postId: null,
     searchedUsers: [],
+    openBot: false,
   },
   reducers: {
     addPostModel: (state, action) => {
@@ -99,6 +100,10 @@ export const serviceSlice = createSlice({
     addToSearchedUsers: (state, action) => {
       state.searchedUsers = action.payload;
     },
+    toggleChatBot: (state) => {
+      console.log("openBot changed to: " + !state.openBot);
+      state.openBot = !state.openBot;
+    },
   },
 });
 
@@ -116,5 +121,6 @@ export const {
   addPostId,
   addToSearchedUsers,
   searchedUsers,
+  toggleChatBot,
 } = serviceSlice.actions;
 export default serviceSlice.reducer;

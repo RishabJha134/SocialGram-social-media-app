@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -44,4 +48,44 @@
 .mode {
   color: whitesmoke;
   background-color: rgb(18, 18, 18);
+}
+
+@layer base {
+  body {
+    @apply antialiased text-gray-900;
+    @apply bg-gradient-to-br from-purple-50 via-white to-purple-50 min-h-screen;
+  }
+}
+
+@layer components {
+  .glass-morphism {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-lg;
+  }
+  .input-focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-2 px-4 rounded-lg 
+           hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 
+           transform hover:scale-[1.02] active:scale-[0.98]
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }

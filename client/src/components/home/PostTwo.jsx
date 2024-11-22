@@ -22,6 +22,7 @@ const PostTwo = (data) => {
   const _700 = useMediaQuery("(min-width:700px)");
 
   const handleLike = async () => {
+    // alert("wbkjjnrf")
     await likePost(e?._id);
     // window.location.reload();
   };

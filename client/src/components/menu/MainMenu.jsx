@@ -65,7 +65,7 @@ const MainMenu = () => {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <MenuItem onClick={handleToggleTheme}> Toogle Theme</MenuItem>
+        <MenuItem onClick={handleToggleTheme}> Toggle Theme</MenuItem>
         <Link to={`/profile/threads/${myInfo?._id}`} className="link">
           <MenuItem>My profile</MenuItem>
         </Link>

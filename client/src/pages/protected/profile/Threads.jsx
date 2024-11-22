@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 const Threads = () => {
   const { user } = useSelector((state) => state.service);
+  console.log(user);
   const _700 = useMediaQuery("(min-width:700px)");
   return (
     <>

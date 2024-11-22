@@ -73,7 +73,7 @@ const Navbar = () => {
           color={darkMode ? "white" : "black"}
           onClick={handleAddPost}
         />
-        <Link to={`follower/${myInfo._id}`} className="link">
+        <Link to={`follower/${myInfo?._id}`} className="link">
           <CiHeart size={_300 ? 32 : 24} color={darkMode ? "white" : "black"} />
         </Link>
 

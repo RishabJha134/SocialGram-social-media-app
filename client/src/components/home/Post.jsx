@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 
 const Post = (data) => {
   const { e } = data;
+  console.log(e);
   const { darkMode, myInfo } = useSelector((state) => state.service);
+  console.log(myInfo);
 
   const [isAdmin, setIsAdmin] = useState();
 
@@ -22,6 +24,22 @@ const Post = (data) => {
     dispatch(addPostId(e._id));
     dispatch(toggleMyMenu(event.currentTarget));
   };
+
+  // Utility function to calculate relative time
+const calculateRelativeTime = (dateString) => {
+  const postDate = new Date(dateString);
+  const now = new Date();
+  const differenceInSeconds = Math.floor((now - postDate) / 1000);
+
+  if (differenceInSeconds < 60) return `${differenceInSeconds} seconds ago`;
+  if (differenceInSeconds < 3600)
+    return `${Math.floor(differenceInSeconds / 60)} minutes ago`;
+  if (differenceInSeconds < 86400)
+    return `${Math.floor(differenceInSeconds / 3600)} hours ago`;
+  if (differenceInSeconds < 604800)
+    return `${Math.floor(differenceInSeconds / 86400)} days ago`;
+  return postDate.toLocaleDateString(); // Show exact date for posts older than a week
+};
 
   const checkIsAdmin = () => {
     if (e?.admin._id === myInfo._id) {
@@ -71,7 +89,8 @@ const Post = (data) => {
             position={"relative"}
             top={2}
           >
-            24h
+            {calculateRelativeTime(e?.createdAt)}
+
           </Typography>
           {isAdmin ? (
             <IoIosMore size={_700 ? 28 : 20} onClick={handleOpenMenu} />
