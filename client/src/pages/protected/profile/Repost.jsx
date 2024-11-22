@@ -18,7 +18,7 @@ const Repost = () => {
               mx={"auto"}
             >
               {user.user.reposts.map((e) => {
-                return <Post key={e._id} post={e} />;
+                return <Post key={e._id} e={e} />;
               })}
             </Stack>
           ) : (

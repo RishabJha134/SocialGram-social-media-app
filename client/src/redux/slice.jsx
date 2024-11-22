@@ -63,26 +63,27 @@ export const serviceSlice = createSlice({
 
     addToAllPost: (state, action) => {
       // this logic prevent the code from duplicate:-
-      console.log("addToAllPost ke slice ka code hai" + action.payload.posts);
+      console.log("addToAllPost ke slice ka code hai" + action.payload);
       const newPostArr = [...action.payload.posts];
-      if (state.allPosts.length === 0) {
+      console.log(state.allPosts.length);
+      if (state?.allPosts?.length === 0) {
         state.allPosts = newPostArr;
+        console.log("newPostArr: " + JSON.stringify(newPostArr));
         return;
       }
       const existingPosts = [...state.allPosts];
       newPostArr.forEach((e) => {
         const existingIndex = existingPosts.findIndex((i) => {
-          return i.id === e.id; // jo post pehle se hai us post ki id agar equal hai newPostArr ke id se toh us existing post ka index dedo.
+          return i._id === e._id;
         });
         if (existingIndex !== -1) {
-          // existing index present  hai matlab  existing post ka id is equal to the newPostArr ke id se.
           existingPosts[existingIndex] = e;
         } else {
-          // matlab new post hai that means koi bhi existing post ka id is not equal to the newPostArr ka id. toh hum usko existing post me push kardenge.
           existingPosts.push(e);
         }
       });
       state.allPosts = existingPosts;
+      console.log("existingPosts: " + JSON.stringify(existingPosts));
     },
 
     deleteThePost: (state, action) => {
@@ -115,6 +116,5 @@ export const {
   addPostId,
   addToSearchedUsers,
   searchedUsers,
-  
 } = serviceSlice.actions;
 export default serviceSlice.reducer;

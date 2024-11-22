@@ -23,7 +23,7 @@ const PostTwo = (data) => {
 
   const handleLike = async () => {
     await likePost(e?._id);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const checkIsLiked = () => {

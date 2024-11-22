@@ -48,15 +48,15 @@ const addPost = async (req, res) => {
 const allPost = async (req, res) => {
   try {
     const { page } = req.query;
-    let pageNumber = page;
-    if (!page || page === undefined) {
-      pageNumber = 1;
-    }
+    // let pageNumber = page;
+    // if (!page || page === undefined) {
+    //   pageNumber = 1;
+    // }
 
     const posts = await Post.find({})
       .sort({ createdAt: -1 }) // descending order:- latest post pehle dikhegi.
-      .skip((pageNumber - 1) * 3)
-      .limit(3)
+      // .skip((pageNumber - 1) * 3)
+      // .limit(3)
       .populate({ path: "admin", select: "-password" })
       .populate({ path: "likes", select: "-password" })
       .populate({
@@ -64,9 +64,10 @@ const allPost = async (req, res) => {
         populate: {
           // nested populate
           path: "admin",
-        //   model: "user",
+          //   model: "user",
         },
       });
+    console.log(posts.length);
     res.status(200).json({ msg: "Posts fetched successfully", posts });
   } catch (err) {
     res.status(400).json({ msg: "Error in allPost!", err: err.message });
@@ -145,7 +146,7 @@ const deletePost = async (req, res) => {
 
 const likePost = async (req, res) => {
   // req.user._id = 6734c2ce2514ca8e2268a2b3
-  console.log("like post wala api hai yeh")
+  console.log("like post wala api hai yeh");
   try {
     // ye id us post ki hai jis post ko hume like ya dislike karna hai:-
     const { id } = req.params;
@@ -182,9 +183,6 @@ const likePost = async (req, res) => {
     res.status(400).json({ msg: "Error in likePost!", err: err.message });
   }
 };
-
-
-
 
 const repost = async (req, res) => {
   console.log("hello world!");
@@ -247,4 +245,3 @@ const singlePost = async (req, res) => {
 };
 
 module.exports = { addPost, allPost, deletePost, likePost, repost, singlePost };
-
