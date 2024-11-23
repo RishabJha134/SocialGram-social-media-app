@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { IoMenu } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMainMenu } from "../../redux/slice";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const _700 = useMediaQuery("(min-width:700px)");
@@ -27,23 +28,26 @@ const Header = () => {
           py={1}
           sx={{ marginTop: 5 }}
         >
-          {darkMode ? (
-            <img
-              src="social-graph-high-resolution-logo-transparent (2).png"
-              className="mb-12"
-              alt="logo"
-              width={90}
-              height={40}
-            />
-          ) : (
-            <img
-              className="mb-12"
-              src="social-graph-high-resolution-logo-transparent (1).png"
-              alt="logo"
-              width={90}
-              height={40}
-            />
-          )}
+          <Link to={"/"}>
+            {darkMode ? (
+              <img
+                src="social-graph-high-resolution-logo-transparent (2).png"
+                className="mb-12"
+                alt="logo"
+                width={90}
+                height={40}
+              />
+            ) : (
+              <img
+                className="mb-12"
+                src="social-graph-high-resolution-logo-transparent (1).png"
+                alt="logo"
+                width={90}
+                height={40}
+              />
+            )}
+          </Link>
+
           <Stack
             justifyContent={"center"}
             width={"550px"}
@@ -83,23 +87,25 @@ const Header = () => {
             p={1}
           >
             <Grid item xs={6}>
-              {darkMode ? (
-                <img
-                  src="social-graph-high-resolution-logo-transparent (2).png"
-                  className="mb-12"
-                  alt="logo"
-                  width={90}
-                  height={40}
-                />
-              ) : (
-                <img
-                  className="mb-12"
-                  src="social-graph-high-resolution-logo-transparent (1).png"
-                  alt="logo"
-                  width={90}
-                  height={40}
-                />
-              )}
+              <Link to={"/"}>
+                {darkMode ? (
+                  <img
+                    src="social-graph-high-resolution-logo-transparent (2).png"
+                    className="mb-12"
+                    alt="logo"
+                    width={90}
+                    height={40}
+                  />
+                ) : (
+                  <img
+                    className="mb-12"
+                    src="social-graph-high-resolution-logo-transparent (1).png"
+                    alt="logo"
+                    width={90}
+                    height={40}
+                  />
+                )}
+              </Link>
             </Grid>
             <IoMenu
               size={36}

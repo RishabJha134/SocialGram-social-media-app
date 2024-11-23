@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Menu, MenuItem } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addMyInfo, toggleMainMenu, toggleThemeMode } from "../../redux/slice";
 import { useLogoutMeMutation } from "../../redux/service";
@@ -8,6 +8,7 @@ import { Bounce, toast } from "react-toastify";
 
 const MainMenu = () => {
   const { anchorE1, myInfo } = useSelector((state) => state.service);
+  const navigate = useNavigate();
 
   // rtk query:-
   const [logoutMeUser, logoutMeUserData] = useLogoutMeMutation();
@@ -25,6 +26,7 @@ const MainMenu = () => {
 
   const handleLogout = async () => {
     handleClose();
+
     await logoutMeUser();
   };
 
@@ -40,7 +42,7 @@ const MainMenu = () => {
         theme: "colored",
         transition: Bounce,
       });
-
+      navigate("/");
     }
     if (logoutMeUserData.isError) {
       toast.error(logoutMeUserData.error.data.msg, {
@@ -53,9 +55,8 @@ const MainMenu = () => {
         theme: "colored",
         transition: Bounce,
       });
-
     }
-  }, [logoutMeUserData.isSuccess,logoutMeUserData.isError]);
+  }, [logoutMeUserData.isSuccess, logoutMeUserData.isError]);
   return (
     <>
       <Menu
