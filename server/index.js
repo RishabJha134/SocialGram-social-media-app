@@ -14,6 +14,8 @@ app.use(cookieParser());
 const corsOptions = {
   origin: [
     "http://localhost:5173",
+    "https://social-graph-sg.vercel.app",
+    "https://social-graph-sg.vercel.app/",
     "https://social-gram-social-media-app.vercel.app",
     "https://social-graph-social-media-app.vercel.app/",
     "https://social-graph-social-media-app-git-main-rishab-jha-projects.vercel.app/",
