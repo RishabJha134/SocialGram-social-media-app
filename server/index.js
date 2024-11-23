@@ -15,21 +15,22 @@ app.use(cookieParser());
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://social-gram-theta.vercel.app",
     "https://social-gram-social-media-app.vercel.app",
-  ], // Allowed frontend URLs
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-  credentials: true, // Enable cookies/auth headers
+  ], // Add your frontend URLs
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Allow cookies/auth headers
 };
 
-// Use CORS Middleware
-// app.use(cors(corsOptions));
+// Use CORS middleware
+app.use(cors(corsOptions));
 
-// app.use(cors());
+// Handle Preflight Requests (Optional but Recommended)
+app.options("*", cors(corsOptions));
+
 
 // Handle Preflight Requests
-app.options("*", cors(corsOptions));
+// app.options("*", cors(corsOptions));
 
 const PORT = process.env.PORT;
 
