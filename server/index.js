@@ -11,11 +11,16 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-
 const corsOptions = {
   origin: [
     "http://localhost:5173",
     "https://social-gram-social-media-app.vercel.app",
+    "https://social-graph-social-media-app.vercel.app/",
+    "https://social-graph-social-media-app-git-main-rishab-jha-projects.vercel.app/",
+    "https://social-graph-social-media-2rlupkxea-rishab-jha-projects.vercel.app/",
+    "https://social-graph-social-media-app.vercel.app",
+    "https://social-graph-social-media-app-git-main-rishab-jha-projects.vercel.app",
+    "https://social-graph-social-media-2rlupkxea-rishab-jha-projects.vercel.app",
   ], // Add your frontend URLs
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -27,7 +32,6 @@ app.use(cors(corsOptions));
 
 // Handle Preflight Requests (Optional but Recommended)
 app.options("*", cors(corsOptions));
-
 
 // Handle Preflight Requests
 // app.options("*", cors(corsOptions));

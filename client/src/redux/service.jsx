@@ -10,6 +10,7 @@ import {
 export const serviceApi = createApi({
   reducerPath: "serviceApi",
   baseQuery: fetchBaseQuery({
+    // mode:"no-cors",
     baseUrl:
       // "https://socialgram-social-media-app-production.up.railway.app/api/v1",
       // "http://localhost:5000/api/v1",
