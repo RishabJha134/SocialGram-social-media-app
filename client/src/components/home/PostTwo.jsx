@@ -29,7 +29,7 @@ const PostTwo = (data) => {
 
   const checkIsLiked = () => {
     if (e?.likes.length > 0) {
-      const variable = e.likes.filter((ele) => ele._id === myInfo._id);
+      const variable = e.likes.filter((ele) => ele?._id === myInfo?._id);
       if (variable.length > 0) {
         setIsLiked(true);
         return;

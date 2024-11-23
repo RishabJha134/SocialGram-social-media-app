@@ -89,18 +89,25 @@ const Home = () => {
             <MagicAI></MagicAI>
           ) : (
             <IconButton
-              // onClick={() => setOpen(true)}
               onClick={handleBot}
               sx={{
-                bgcolor: "primary.main",
-                color: "black",
-                ":hover": { bgcolor: "primary.dark" },
+                // Background color based on mode
+                bgcolor: darkMode ? "#2E2E2E" : "orange",
+                // Icon color based on mode
+                color: darkMode ? "orange" : "#2D2D2D",
+                ":hover": {
+                  // Hover background color based on mode
+                  bgcolor: darkMode ? "#37474F" : "#E0F7FA",
+                  // Hover icon color based on mode
+                  color: darkMode ? "#81D4FA" : "#006064",
+                },
                 position: "fixed",
-                bottom: 70,
-                right: 16,
-                width: 55,
-                height: 56,
-                boxShadow: "0px 4px 10px rgba(0,0,0,0.3)",
+                bottom: 46,
+                right: 31,
+                width: 60,
+                height: 60,
+                borderRadius: "50%", // Makes the button circular
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Subtle shadow for depth
               }}
             >
               <AiOutlineRobot size={30} />
