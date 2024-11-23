@@ -11,25 +11,25 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// CORS Configuration
-// const corsOptions = {
-//   origin: [
-//     "http://localhost:5173",
-//     "https://social-gram-theta.vercel.app",
-//     "https://social-gram-social-media-app.vercel.app/",
-//   ], // Allowed frontend URLs
-//   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-//   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-//   credentials: true, // Enable cookies/auth headers
-// };
+CORS Configuration
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "https://social-gram-theta.vercel.app",
+    "https://social-gram-social-media-app.vercel.app/",
+  ], // Allowed frontend URLs
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  credentials: true, // Enable cookies/auth headers
+};
 
 // Use CORS Middleware
 // app.use(cors(corsOptions));
 
-app.use(cors());
+// app.use(cors());
 
 // Handle Preflight Requests
-// app.options("*", cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 const PORT = process.env.PORT;
 
