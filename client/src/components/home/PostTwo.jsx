@@ -99,29 +99,29 @@ const PostTwo = (data) => {
               </Typography>
               {/* </Link> */}
             </Stack>
-          </Link>
 
-          {e ? (
-            e.media ? (
-              <img
-                src={e?.media}
-                alt={e?.media}
-                loading="lazy"
-                width={
-                  _700
-                    ? "400px"
-                    : _500
-                    ? "350px"
-                    : _400
-                    ? "250px"
-                    : _300
-                    ? "180px"
-                    : "150px"
-                }
-                height={"auto"}
-              />
-            ) : null
-          ) : null}
+            {e ? (
+              e.media ? (
+                <img
+                  src={e?.media}
+                  alt={e?.media}
+                  loading="lazy"
+                  width={
+                    _700
+                      ? "400px"
+                      : _500
+                      ? "350px"
+                      : _400
+                      ? "250px"
+                      : _300
+                      ? "180px"
+                      : "150px"
+                  }
+                  height={"auto"}
+                />
+              ) : null
+            ) : null}
+          </Link>
         </Stack>
         <Stack flexDirection={"column"} gap={1}>
           <Stack flexDirection={"row"} gap={2} m={1}>
@@ -141,7 +141,7 @@ const PostTwo = (data) => {
               size={_700 ? 32 : _300 ? 28 : 24}
               onClick={handleRepost}
             />
-            <IoMdSend size={_700 ? 32 : _300 ? 28 : 24} />
+            {/* <IoMdSend size={_700 ? 32 : _300 ? 28 : 24} /> */}
           </Stack>
           <Stack
             flexDirection={"row"}

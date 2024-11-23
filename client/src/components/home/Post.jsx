@@ -5,6 +5,7 @@ import PostTwo from "./PostTwo";
 import { useDispatch, useSelector } from "react-redux";
 import { addPostId, toggleMyMenu } from "../../redux/slice";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Post = (data) => {
   const { e } = data;
@@ -26,20 +27,20 @@ const Post = (data) => {
   };
 
   // Utility function to calculate relative time
-const calculateRelativeTime = (dateString) => {
-  const postDate = new Date(dateString);
-  const now = new Date();
-  const differenceInSeconds = Math.floor((now - postDate) / 1000);
+  const calculateRelativeTime = (dateString) => {
+    const postDate = new Date(dateString);
+    const now = new Date();
+    const differenceInSeconds = Math.floor((now - postDate) / 1000);
 
-  if (differenceInSeconds < 60) return `${differenceInSeconds} seconds ago`;
-  if (differenceInSeconds < 3600)
-    return `${Math.floor(differenceInSeconds / 60)} minutes ago`;
-  if (differenceInSeconds < 86400)
-    return `${Math.floor(differenceInSeconds / 3600)} hours ago`;
-  if (differenceInSeconds < 604800)
-    return `${Math.floor(differenceInSeconds / 86400)} days ago`;
-  return postDate.toLocaleDateString(); // Show exact date for posts older than a week
-};
+    if (differenceInSeconds < 60) return `${differenceInSeconds}s`;
+    if (differenceInSeconds < 3600)
+      return `${Math.floor(differenceInSeconds / 60)}m`;
+    if (differenceInSeconds < 86400)
+      return `${Math.floor(differenceInSeconds / 3600)}h`;
+    if (differenceInSeconds < 604800)
+      return `${Math.floor(differenceInSeconds / 86400)}d`;
+    return postDate.toLocaleDateString(); // Show exact date for posts older than a week
+  };
 
   const checkIsAdmin = () => {
     if (e?.admin?._id === myInfo._id) {
@@ -76,8 +77,11 @@ const calculateRelativeTime = (dateString) => {
           <PostOne e={e} />
           <PostTwo e={e} />
         </Stack>
+
         <Stack
           flexDirection={"row"}
+          // alignItems={"center"}
+
           justifyContent={"center"}
           gap={1}
           fontSize={"1rem"}
@@ -90,7 +94,6 @@ const calculateRelativeTime = (dateString) => {
             top={2}
           >
             {calculateRelativeTime(e?.createdAt)}
-
           </Typography>
           {isAdmin ? (
             <IoIosMore size={_700 ? 28 : 20} onClick={handleOpenMenu} />

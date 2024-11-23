@@ -23,6 +23,7 @@ import { Bounce, toast } from "react-toastify";
 import MagicAI from "../../../components/common/MagicAI";
 // import MagicAI from './../../../components/common/MagicAI';
 import { AiOutlineRobot } from "react-icons/ai";
+import { Box, UserPlus } from "lucide-react";
 
 const ProfileLayout = () => {
   const _300 = useMediaQuery("(min-width:300px)");
@@ -149,11 +150,11 @@ const ProfileLayout = () => {
               <Typography variant="h6" fontSize={_300 ? "1rem" : "0.8rem"}>
                 {data ? (data.user ? data.user.email : "") : ""}
               </Typography>
-              <Chip
+              {/* <Chip
                 label="threads.net"
                 size="small"
                 sx={{ fontSize: _300 ? "0.8rem" : "0.6rem" }}
-              />
+              /> */}
             </Stack>
           </Stack>
           <Avatar
@@ -174,12 +175,14 @@ const ProfileLayout = () => {
         >
           <Link
             to={`/follower/${data?.user?._id}`}
-            style={{ textDecoration: "none" }}
+            style={{ textDecoration: "none", color: "inherit" }}
+            aria-label={`View followers of ${data?.user?.name || "this user"}`}
           >
-            <Typography
-              variant="subtitle2"
-              color="black"
-              fontSize={20}
+            <Stack
+              direction="row"
+              gap={1}
+              alignItems="center"
+              justifyContent="center"
               sx={{
                 cursor: "pointer",
                 transition: "color 0.3s ease, transform 0.2s ease",
@@ -192,10 +195,11 @@ const ProfileLayout = () => {
                 },
               }}
             >
-              {data?.user?.followers?.length > 0
-                ? `${data.user.followers.length} followers`
-                : "No Followers"}
-            </Typography>
+              <UserPlus />
+              <Typography variant="subtitle2" color={darkMode?"white":"black"} fontSize={20}>
+                {data?.user?.followers?.length ?? 0} followers
+              </Typography>
+            </Stack>
           </Link>
 
           {/* please here add my here magic ai logic please create a magic ai icon when user click on the icon then open a 
@@ -253,30 +257,43 @@ const ProfileLayout = () => {
       </Button>
 
       <Stack
-        flexDirection={"row"}
-        justifyContent={"space-evenly"}
-        my={5}
-        pb={2}
-        borderBottom={"2px solid gray"}
-        fontSize={_500 ? "1.2rem" : _300 ? "1.1rem" : "0.9rem"}
-        width={_700 ? "800px" : "90%"}
-        mx={"auto"}
+        direction="row"
+        justifyContent="space-evenly"
+        alignItems="center"
+        spacing={2}
+        py={2}
+        // borderBottom="2px solid #e5e7eb"
+        fontSize={["0.9rem", "1.1rem", "1.2rem"]}
+        width={["90%", "800px"]}
+        mx="auto"
+        className="transition duration-300 ease-in-out hover:shadow-lg"
       >
+        {/* Threads Link */}
         <Link
           to={`/profile/threads/${data?.user._id}`}
-          className={`link ${darkMode ? "mode" : ""}`}
+          className={`text-black  hover:text-white transition-colors duration-300 ease-in-out ${
+            darkMode ? "dark:bg-gray-800 dark:text-white" : ""
+          } py-2 px-4 rounded-lg hover:bg-blue-100 dark:hover:bg-zinc-700`}
         >
           Threads
         </Link>
+
+        {/* Replies Link */}
         <Link
           to={`/profile/replies/${data?.user._id}`}
-          className={`link ${darkMode ? "mode" : ""}`}
+          className={`text-black  hover:text-white transition-colors duration-300 ease-in-out ${
+            darkMode ? "dark:bg-gray-800 dark:text-white" : ""
+          } py-2 px-4 rounded-lg hover:bg-blue-100 dark:hover:bg-zinc-700`}
         >
           Replies
         </Link>
+
+        {/* Reposts Link */}
         <Link
           to={`/profile/reposts/${data?.user._id}`}
-          className={`link ${darkMode ? "mode" : ""}`}
+          className={`text-black  hover:text-white transition-colors duration-300 ease-in-out ${
+            darkMode ? "dark:bg-gray-800 dark:text-white" : ""
+          } py-2 px-4 rounded-lg hover:bg-blue-100 dark:hover:bg-zinc-700`}
         >
           Reposts
         </Link>
