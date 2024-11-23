@@ -13,7 +13,7 @@ export const serviceApi = createApi({
     // mode:"no-cors",
     baseUrl:
       // "https://socialgram-social-media-app-production.up.railway.app/api/v1",
-      "http://localhost:5000/api/v1",
+      // "http://localhost:5000/api/v1",
       "https://socialgram-social-media-app-production.up.railway.app/api/v1",
     credentials: "include", // for using the cookies
   }),
