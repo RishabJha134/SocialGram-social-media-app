@@ -29,23 +29,25 @@ const Header = () => {
         >
           {darkMode ? (
             <img
-              src="Threads-logo-black-bg.webp"
+              src="social-graph-high-resolution-logo-transparent (2).png"
+              className="mb-12"
               alt="logo"
-              width={56}
-              height={50}
+              width={90}
+              height={40}
             />
           ) : (
             <img
-              src="Threads-logo-white-bg.png"
+              className="mb-12"
+              src="social-graph-high-resolution-logo-transparent (1).png"
               alt="logo"
-              width={70}
+              width={90}
               height={40}
             />
           )}
           <Stack
             justifyContent={"center"}
             width={"550px"}
-            bgcolor={darkMode?"":"aliceblue"}
+            bgcolor={darkMode ? "" : "aliceblue"}
             zIndex={2}
             height={96}
           >
@@ -68,7 +70,7 @@ const Header = () => {
             width={"100%"}
             height={52}
             p={1}
-            bgcolor={darkMode?"":"aliceblue"}
+            bgcolor={darkMode ? "" : "aliceblue"}
             zIndex={2}
           >
             <Navbar></Navbar>
@@ -83,17 +85,19 @@ const Header = () => {
             <Grid item xs={6}>
               {darkMode ? (
                 <img
-                  src="Threads-logo-black-bg.webp"
+                  src="social-graph-high-resolution-logo-transparent (2).png"
+                  className="mb-12"
                   alt="logo"
-                  width={50}
-                  height={35}
+                  width={90}
+                  height={40}
                 />
               ) : (
                 <img
-                  src="Threads-logo-white-bg.png"
+                  className="mb-12"
+                  src="social-graph-high-resolution-logo-transparent (1).png"
                   alt="logo"
-                  width={60}
-                  height={35}
+                  width={90}
+                  height={40}
                 />
               )}
             </Grid>

@@ -10,7 +10,7 @@ const Input = () => {
   // const { myInfo } = useMyInfoQuery();
   // console.log(JSON.stringify(myInfo));
   const {myInfo} = useSelector((state)=>state.service);
-  console.log(myInfo)
+  // console.log(myInfo)
   const dispatch = useDispatch();
 
   const handleAddPost = () => {
@@ -68,7 +68,7 @@ const Input = () => {
             className="flex items-center gap-2 text-sm group-hover:text-purple-600 transition-colors duration-300"
           >
             <PenLine size={16} className="group-hover:rotate-12 transition-transform duration-300" />
-            Start a thread...
+            Have an Idea...
           </Typography>
         </Stack>
       </Stack>

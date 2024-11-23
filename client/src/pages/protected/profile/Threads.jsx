@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const Threads = () => {
   const { user } = useSelector((state) => state.service);
-  console.log(user);
+  // console.log(user);
   const _700 = useMediaQuery("(min-width:700px)");
   return (
     <>
@@ -24,7 +24,7 @@ const Threads = () => {
             </Stack>
           ) : (
             <Typography variant="h6" textAlign={"center"}>
-              No Thread yet !
+              No Post yet !
             </Typography>
           )
         ) : (

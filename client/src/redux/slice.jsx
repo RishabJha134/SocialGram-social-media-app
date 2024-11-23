@@ -16,36 +16,36 @@ export const serviceSlice = createSlice({
   },
   reducers: {
     addPostModel: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.openAddPostModel = action.payload;
     },
     editProfileModel: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.openEditProfileModel = action.payload;
     },
     toggleMainMenu: (state, action) => {
-      console.log("anchorE1 jis element ke pass open hoga" + action.payload);
+      // console.log("anchorE1 jis element ke pass open hoga" + action.payload);
       state.anchorE1 = action.payload;
     },
     toggleMyMenu: (state, action) => {
-      console.log("anchorE2 jis element ke pass open hoga" + action.payload);
+      // console.log("anchorE2 jis element ke pass open hoga" + action.payload);
       state.anchorE2 = action.payload;
     },
     toggleThemeMode: (state) => {
-      console.log("Dark mode changed to: " + !state.darkMode);
+      // console.log("Dark mode changed to: " + !state.darkMode);
       state.darkMode = !state.darkMode;
     },
     addMyInfo: (state, action) => {
       if (action.payload === null) {
         state.myInfo = null;
-        console.log("User logged out. myInfo set to null.");
+        // console.log("User logged out. myInfo set to null.");
       } else {
-        console.log("add my info: " + action.payload.me);
+        // console.log("add my info: " + action.payload.me);
         state.myInfo = action.payload.me;
       }
     },
     addUser: (state, action) => {
-      console.log("add user: " + action.payload.user);
+      // console.log("add user: " + action.payload.user);
       if (action.payload.user) {
         state.user = action.payload;
       }
@@ -67,12 +67,12 @@ export const serviceSlice = createSlice({
 
     addToAllPost: (state, action) => {
       // this logic prevent the code from duplicate:-
-      console.log("addToAllPost ke slice ka code hai" + action.payload);
+      // console.log("addToAllPost ke slice ka code hai" + action.payload);
       const newPostArr = [...action.payload.posts];
-      console.log(state.allPosts.length);
+      // console.log(state.allPosts.length);
       if (state?.allPosts?.length === 0) {
         state.allPosts = newPostArr;
-        console.log("newPostArr: " + JSON.stringify(newPostArr));
+        // console.log("newPostArr: " + JSON.stringify(newPostArr));
         return;
       }
       const existingPosts = [...state.allPosts];
@@ -87,7 +87,7 @@ export const serviceSlice = createSlice({
         }
       });
       state.allPosts = existingPosts;
-      console.log("existingPosts: " + JSON.stringify(existingPosts));
+      // console.log("existingPosts: " + JSON.stringify(existingPosts));
     },
 
     deleteThePost: (state, action) => {
@@ -104,7 +104,7 @@ export const serviceSlice = createSlice({
       state.searchedUsers = action.payload;
     },
     toggleChatBot: (state) => {
-      console.log("openBot changed to: " + !state.openBot);
+      // console.log("openBot changed to: " + !state.openBot);
       state.openBot = !state.openBot;
     },
   },

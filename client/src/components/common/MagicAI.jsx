@@ -30,7 +30,7 @@ const MagicAI = () => {
       "Act as a social media content generator system and generate content ideas: " +
       searchText.current.value;
 
-      console.log(gptQuery);
+      // console.log(gptQuery);
 
     try {
       if (!searchText.current.value) {
@@ -49,7 +49,7 @@ const MagicAI = () => {
         gptResults.data.candidates[0].content.parts[0].text ||
         "No content generated.";
 
-      console.log(aiResponse);
+      // console.log(aiResponse);
 
       setResult(aiResponse); // Update the result state
       toast.success("Content generated successfully!");
@@ -66,8 +66,8 @@ const MagicAI = () => {
     searchText.current.value = ""; // Clear the input field
     setResult(""); // Clear the result
     dispatch(toggleChatBot()); // Close the modal via Redux state
-    console.log(searchText.current.value);
-    console.log(result);
+    // console.log(searchText.current.value);
+    // console.log(result);
   };
 
   return (

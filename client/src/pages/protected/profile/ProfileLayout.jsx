@@ -36,9 +36,9 @@ const ProfileLayout = () => {
   const params = useParams();
   // console.log(params);
   const { data } = useUserDetailsQuery(params?.id);
-  console.log(
-    "useUserDetailsQuery" + JSON.stringify(data?.user.followers.length)
-  );
+  // console.log(
+  //   "useUserDetailsQuery" + JSON.stringify(data?.user.followers.length)
+  // );
   const [followUser, followUserData] = useFollowUserMutation();
   const [myAccount, setMyAccount] = useState();
   const [isFollowing, setIsFollowing] = useState();
@@ -275,7 +275,7 @@ const ProfileLayout = () => {
             darkMode ? "dark:bg-gray-800 dark:text-white" : ""
           } py-2 px-4 rounded-lg hover:bg-blue-100 dark:hover:bg-zinc-700`}
         >
-          Threads
+          All Posts
         </Link>
 
         {/* Replies Link */}

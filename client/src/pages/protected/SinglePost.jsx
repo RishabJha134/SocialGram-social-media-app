@@ -11,7 +11,7 @@ const SinglePost = () => {
   const [comment, setComment] = useState("");
   const { data, refetch } = useSinglePostQuery(params?.id || "");
   // refetch:- refetch ki zaroorat hume isiliye hoti hai ki kyoki hum mannualy is api ko wapis se fetch kar sakte hai. it is mannual data fetching:-
-  console.log("single post data:" + data);
+  // console.log("single post data:" + data);
 
   const [addComment, addCommentData] = useAddCommentMutation();
 

@@ -9,9 +9,9 @@ import { Link } from "react-router-dom";
 
 const Post = (data) => {
   const { e } = data;
-  console.log(e);
+  // console.log(e);
   const { darkMode, myInfo } = useSelector((state) => state.service);
-  console.log(myInfo);
+  // console.log(myInfo);
 
   const [isAdmin, setIsAdmin] = useState();
 

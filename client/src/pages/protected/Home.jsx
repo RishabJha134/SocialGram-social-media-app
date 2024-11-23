@@ -14,12 +14,12 @@ const Home = () => {
   const _700 = useMediaQuery("(min-width:700px)");
   const { data, isLoading } = useAllPostQuery(page); // No page parameter
   const { darkMode, allPosts, openBot } = useSelector((state) => state.service);
-  console.log(openBot);
+  // console.log(openBot);
   const dispatch = useDispatch();
-  console.log("allPosts" + JSON.stringify(allPosts.length));
+  // console.log("allPosts" + JSON.stringify(allPosts.length));
 
   function handleBot() {
-    console.log("Bot from home page");
+    // console.log("Bot from home page");
     dispatch(toggleChatBot());
   }
 

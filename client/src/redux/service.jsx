@@ -46,11 +46,11 @@ export const serviceApi = createApi({
       async onQueryStarted(params, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log("after pressing logout" + data);
+          // console.log("after pressing logout" + data);
           dispatch(addMyInfo(data));
         } catch (err) {
           dispatch(addMyInfo(null));
-          console.log(err);
+          // console.log(err);
         }
       },
     }),
@@ -72,11 +72,11 @@ export const serviceApi = createApi({
       async onQueryStarted(params, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log(data);
+          // console.log(data);
           dispatch(addUser(data));
-          console.log(data);
+          // console.log(data);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       },
     }),
@@ -114,10 +114,10 @@ export const serviceApi = createApi({
       async onQueryStarted(params, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log("after adding post" + data);
+          // console.log("after adding post" + data);
           dispatch(addSingle(data));
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       },
     }),
@@ -141,11 +141,11 @@ export const serviceApi = createApi({
       async onQueryStarted(params, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log("all post data " + data);
+          // console.log("all post data " + data);
           dispatch(addToAllPost(data));
-          console.log(data);
+          // console.log(data);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       },
     }),
@@ -161,7 +161,7 @@ export const serviceApi = createApi({
           const { data } = await queryFulfilled;
           dispatch(deleteThePost(data));
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       },
     }),
