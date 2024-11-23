@@ -45,7 +45,10 @@ export const serviceSlice = createSlice({
       }
     },
     addUser: (state, action) => {
-      state.user = action.payload;
+      console.log("add user: " + action.payload.user);
+      if (action.payload.user) {
+        state.user = action.payload;
+      }
     },
     addSingle: (state, action) => {
       let newArr = [...state.allPosts];

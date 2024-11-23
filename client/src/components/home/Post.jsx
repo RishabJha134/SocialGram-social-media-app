@@ -1,7 +1,7 @@
 import { Stack, Typography, useMediaQuery } from "@mui/material";
 import { IoIosMore } from "react-icons/io";
 import PostOne from "./PostOne";
-import PostTwo from "./postTwo";
+import PostTwo from "./PostTwo";
 import { useDispatch, useSelector } from "react-redux";
 import { addPostId, toggleMyMenu } from "../../redux/slice";
 import { useEffect, useState } from "react";
