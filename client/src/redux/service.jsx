@@ -14,7 +14,7 @@ export const serviceApi = createApi({
     baseUrl:
       // "https://socialgram-social-media-app-production.up.railway.app/api/v1",
       // "http://localhost:5000/api/v1",
-      "https://socialgram-social-media-app.onrender.com/api/v1",
+      "https://socialgram-social-media-app-production.up.railway.app/api/v1",
     credentials: "include", // for using the cookies
   }),
   keepUnusedDataFor: 60 * 60 * 24 * 7, // Cache data for 1 week
